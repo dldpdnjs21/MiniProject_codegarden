@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './css/JoinPage.css';
 import { useNavigate } from 'react-router-dom';
-import loginimage from './img/login_image.png';
+import loginimage from './img/login_logo.svg';
 
 const JoinPage = () => {
   const [formData, setFormData] = useState({
