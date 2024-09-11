@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f2f2f2;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 1070px;
+  height: 600px;
+  text-align: center;
+}
+
+.title h1 {
+  text-align: left;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.title span {
+  color: #67b345;
+}
+
+.illustration{
+  flex: 1;
+  width: 50%;
+  margin: auto;
+}
+.illustration img {
+  width: 100%;
+  max-width: 370px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.login-form{
+  flex: 1;
+  width: 50%;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.login-form input, .login-form select {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.login-form input::placeholder {
+  color: #888;
+}
+
+.login-form button {
+  width: 90%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: gray;
+}
+
+p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+p a {
+  color: black;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
