@@ -1,0 +1,35 @@
+/* 전체 헤더 스타일 */
+.header {
+  display: flex;
+  justify-content: space-between; /* 양쪽에 요소 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  background-color: white;
+  padding: 30px 50px; /* 좌우에 패딩 추가 */
+  position: relative; /* 가운데 정렬을 위해 position 사용 */
+  box-shadow: 0px 1px 10px 1px #cecccc; /* 그림자 */
+}
+
+/* 로고 컨테이너 스타일 */
+.logoContainer {
+  position: absolute; /* 부모 기준으로 절대 위치 지정 */
+  left: 50%; /* 화면의 정 가운데로 이동 */
+  transform: translateX(-50%); /* 정확히 가운데에 배치 */
+}
+
+/* 로고 이미지 스타일 */
+.logoImg {
+  height: 80px;
+}
+
+/* 메뉴 아이콘 컨테이너 */
+.menu {
+  display: flex;
+  column-gap: 20px; /* 아이콘 간격 */
+  margin-left: auto; /* 메뉴를 오른쪽으로 밀기 */
+}
+
+/* 개별 아이콘 스타일 */
+.menuIcon {
+  height: 30px;
+  cursor: pointer;
+}
