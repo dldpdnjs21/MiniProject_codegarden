@@ -7,3 +7,51 @@
   box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
   padding: 20px;
 }
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.profileWrap {
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  align-items: center;
+}
+
+.nickname {
+  font-size: 24px;
+}
+
+.id {
+  font-size: 18px;
+  color: #d9d9d9;
+}
+
+.field {
+  color: #59705e;
+  margin-top: 10px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 30px;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.mypage {
+  background-color: #7e8e81;
+  color: white;
+  margin-top: 10px;
+}
+
+.logout {
+  background-color: #c6d3c9;
+  color: white;
+}
