@@ -5,6 +5,7 @@ import search_user from "./img/user_plus.svg";
 import add_post from "./img/add_circle.svg";
 import notification from "./img/notifications.svg";
 import { useNavigate } from "react-router-dom";
+import SearchUser from "./modal/SearchUser";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,6 +24,10 @@ const Header = () => {
   const handleClickNoti = () => {
     console.log("알림창");
   };
+
+  //   모달창
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const modalBackground = useRef();
   return (
     <header className={style.header}>
       <div className={style.logo} onClick={handleClickLogo}>
@@ -49,6 +54,12 @@ const Header = () => {
           onClick={handleClickNoti}
         />
       </div>
+      {searchModalOpen && (
+        <SearchUser
+          setModalOpen={setSearchModalOpen}
+          modalBackground={modalBackground}
+        />
+      )}
     </header>
   );
 };
