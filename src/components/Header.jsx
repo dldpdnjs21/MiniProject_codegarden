@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import style from "./css/Header.module.css";
 import logo from "./img/header_logo.svg";
 import search_user from "./img/user_plus.svg";
 import add_post from "./img/add_circle.svg";
 import notification from "./img/notifications.svg";
-import { useNavigate } from "react-router-dom";
+
 import SearchUser from "./modal/SearchUser";
 
 const Header = () => {
@@ -30,7 +32,7 @@ const Header = () => {
   const modalBackground = useRef();
   return (
     <header className={style.header}>
-      <div className={style.logo} onClick={handleClickLogo}>
+      <div className={style.logoContainer} onClick={handleClickLogo}>
         <img src={logo} alt="logo" className={style.logoImg} />
       </div>
 
