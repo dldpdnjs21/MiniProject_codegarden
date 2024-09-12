@@ -1,0 +1,8 @@
+.feedContainer {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
+  width: 764px;
+  margin-left: auto;
+  background-color: white;
+  padding: 20px;
+}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import style from "./css/Header.module.css";
 import logo from "./img/header_logo.svg";
-import search_user from "./img/user_plus.svg";
+import search_user from "./img/search_user.svg";
 import add_post from "./img/add_circle.svg";
 import notification from "./img/notifications.svg";
 
