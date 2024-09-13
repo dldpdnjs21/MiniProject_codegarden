@@ -11,6 +11,7 @@ import noti_click from "./img/noti_click.svg";
 import SearchUser from "./modal/SearchUser";
 import useDetectClose from "../hooks/useDetectColse";
 import Notification from "./dropdown/Notification";
+import FeedModal from "./modal/FeedModal";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -28,7 +29,12 @@ const Header = () => {
 
   // 모달창
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const modalBackground = useRef();
+  const openSearchModal = () => {
+    setSearchModalOpen(true);
+  };
+  const closeSearchModal = () => {
+    setSearchModalOpen(false);
+  };
 
   // 알림창
   const notiRef = useRef(null);
@@ -47,35 +53,32 @@ const Header = () => {
         </div>
 
         <div className={style.menu}>
-          <img
-            src={search_user}
-            alt="search user"
-            className={style.menuIcon}
-            onClick={handleClickSearchUser}
-          />
-          <img
-            src={add_post}
-            alt="add post"
-            className={style.menuIcon}
-            onClick={handleClickAdd}
-          />
-          <img
-            src={`${notiOpen ? noti_click : notification}`}
-            alt="notification"
-            className={style.menuIcon}
-            onClick={handleClickNoti}
-          />
+          <div className={style.iconContainer} onClick={handleClickSearchUser}>
+            <img
+              src={search_user}
+              alt="search user"
+              className={style.menuIcon}
+            />
+            <div className={style.overlay}></div>
+          </div>
+          <div className={style.iconContainer} onClick={openSearchModal}>
+            <img src={add_post} alt="add post" className={style.menuIcon} />
+            <div className={style.overlay}></div>
+          </div>
+          <div className={style.iconContainer} onClick={handleClickNoti}>
+            <img
+              src={`${notiOpen ? noti_click : notification}`}
+              alt="notification"
+              className={style.menuIcon}
+            />
+            <div className={style.overlay}></div>
+          </div>
         </div>
       </header>
       {/* <Notification /> */}
       {/* {notiOpen && <Notification useRef={notiRef} />} */}
       {notiOpen && <Notification />}
-      {searchModalOpen && (
-        <SearchUser
-          setModalOpen={setSearchModalOpen}
-          modalBackground={modalBackground}
-        />
-      )}
+      <FeedModal isOpen={searchModalOpen} closeModal={closeSearchModal} />
     </>
   );
 };

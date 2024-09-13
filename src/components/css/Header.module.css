@@ -30,7 +30,33 @@
 }
 
 /* 개별 아이콘 스타일 */
-.menuIcon {
+.iconContainer {
+  width: 40px;
   height: 40px;
+  position: relative;
   cursor: pointer;
+}
+
+.menuIcon {
+  width: inherit;
+  height: inherit;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(198, 211, 201, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: 50%;
+}
+
+.iconContainer:hover .overlay {
+  opacity: 1;
 }
