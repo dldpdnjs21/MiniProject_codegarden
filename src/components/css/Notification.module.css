@@ -1,33 +1,42 @@
 .notificationDropdown {
-    position: absolute;
-    top: 70px; /* 위치 조정 */
-    right: 90px;
-    width: 200px;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    z-index: 10;
-  }
-  
-  .notificationDropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .notificationDropdown li {
-    padding: 10px 25px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .notificationDropdown li:last-child {
-    border-bottom: none;
-  }
+  position: absolute;
+  top: 75px; /* 위치 조정 */
+  right: 90px;
+  width: 300px;
+  background-color: white;
+  border: 0.5px solid #c6d3c9;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 10;
+  padding-bottom: 10px;
+}
 
-  .notiHeader {
-    padding: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #59705E;
-  }
+.notificationDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notificationDropdown li {
+  margin: 0 25px;
+  padding: 10px 5px;
+  border-bottom: 1px solid #c6d3c9;
+  font-size: 14px;
+}
+
+.notificationDropdown li:last-child {
+  border-bottom: none;
+}
+
+.notiHeader {
+  padding: 25px 25px 10px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #59705e;
+}
+
+.notiTitle {
+  padding: 10px 25px;
+  color: #7e8e81;
+  font-size: 14px;
+}

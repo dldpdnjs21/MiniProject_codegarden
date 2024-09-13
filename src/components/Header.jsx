@@ -6,6 +6,7 @@ import logo from "./img/header_logo.svg";
 import search_user from "./img/search_user.svg";
 import add_post from "./img/add_circle.svg";
 import notification from "./img/notifications.svg";
+import noti_click from "./img/noti_click.svg";
 
 import SearchUser from "./modal/SearchUser";
 import useDetectClose from "../hooks/useDetectColse";
@@ -59,7 +60,7 @@ const Header = () => {
             onClick={handleClickAdd}
           />
           <img
-            src={notification}
+            src={`${notiOpen ? noti_click : notification}`}
             alt="notification"
             className={style.menuIcon}
             onClick={handleClickNoti}
