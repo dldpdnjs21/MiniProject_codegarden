@@ -5,9 +5,19 @@ import { FaPaperclip, FaImage, FaCode } from "react-icons/fa";
 const FeedModal = ({ isOpen, closeModal }) => {
   const [file, setFile] = useState(null);
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  const [imagePreview, setImagePreview] = useState(null);
+
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  setFile(file);
+  if (file && file.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+};
 
   if (!isOpen) return null;
 
@@ -34,20 +44,14 @@ const FeedModal = ({ isOpen, closeModal }) => {
               placeholder="피드백이 필요한 당신의 코드를 작성해주세요"
               className={style.modalTextarea}
             />
+            {imagePreview && (
+  <div className={style.imagePreview}>
+    <img src={imagePreview} alt="이미지 미리보기" className={style.previewImage} />
+  </div>
+)}
           </div>
           <div className={style.modalBottom}>
             <div className={style.modalFile}>
-              <button type="button" className={style.modalFileButton}>
-                <label htmlFor="file-upload" className={style.iconLabel}>
-                  <FaPaperclip className={style.icon} />
-                  <input
-                    type="file"
-                    id="file-upload"
-                    onChange={handleFileChange}
-                    className={style.fileInput}
-                  />
-                </label>
-              </button>
               <button type="button" className={style.modalFileButton}>
                 <label htmlFor="image-upload" className={style.iconLabel}>
                   <FaImage className={style.icon} />
