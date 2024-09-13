@@ -3,12 +3,15 @@
   top: 75px; /* 위치 조정 */
   right: 90px;
   width: 300px;
+  max-height: 400px;
   background-color: white;
-  border: 0.5px solid #c6d3c9;
+  border: 0.5px solid rgb(198, 211, 201, 0.5);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   z-index: 10;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
+  /* 스크롤은 scrollable 클래스에서만 적용되므로 이 부분을 제거 */
+  overflow: hidden;
 }
 
 .notificationDropdown ul {
@@ -20,7 +23,7 @@
 .notificationDropdown li {
   margin: 0 25px;
   padding: 10px 5px;
-  border-bottom: 1px solid #c6d3c9;
+  border-bottom: 1px solid #e6f0e9;
   font-size: 14px;
 }
 
@@ -29,14 +32,30 @@
 }
 
 .notiHeader {
-  padding: 25px 25px 10px 25px;
+  /* padding: 25px 25px 10px 25px; */
+  padding: 20px 25px;
   font-size: 16px;
   font-weight: bold;
   color: #59705e;
+  border-bottom: 2px solid #d2e0d5;
+  line-height: 16px;
+  /* 고정 위치 적용 */
+  position: relative;
+  top: 0;
+  background-color: white;
+  z-index: 1;
 }
 
 .notiTitle {
   padding: 10px 25px;
   color: #7e8e81;
   font-size: 14px;
+}
+
+.scrollable {
+  /* 상단 여백을 header의 높이만큼 조정 */
+  max-height: 244px; /* 전체 높이에서 header의 높이(60px)를 뺀 값 */
+  /* margin-top: 5px; */
+  overflow-y: auto;
+  padding: 10px 0;
 }
