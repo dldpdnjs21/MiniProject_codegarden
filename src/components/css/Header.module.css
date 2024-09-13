@@ -19,6 +19,7 @@
 /* 로고 이미지 스타일 */
 .logoImg {
   height: 80px;
+  cursor: pointer;
 }
 
 /* 메뉴 아이콘 컨테이너 */
@@ -30,6 +31,6 @@
 
 /* 개별 아이콘 스타일 */
 .menuIcon {
-  height: 30px;
+  height: 40px;
   cursor: pointer;
 }
