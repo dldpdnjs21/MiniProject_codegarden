@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import style from "./css/Header.module.css";
 import logo from "./img/header_logo.svg";
 import search_user from "./img/search_user.svg";
@@ -28,13 +28,43 @@ const Header = () => {
   };
 
   // 모달창
+  const [feedModalOpen, setFeedModalOpen] = useState(false);
+  const openFeedModal = () => {
+    setFeedModalOpen(true);
+  };
+  const closeFeedModal = () => {
+    setFeedModalOpen(false);
+  };
+
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const searchRef = useRef(null);
   const openSearchModal = () => {
     setSearchModalOpen(true);
   };
   const closeSearchModal = () => {
     setSearchModalOpen(false);
   };
+
+  const handleClickOutsideSearch = (e) => {
+    if (searchRef.current && !searchRef.current.contains(e.target)) {
+      closeSearchModal(); // 모달 닫기
+    }
+  };
+
+  useEffect(() => {
+    if (searchModalOpen) {
+      // 모달이 열렸을 때만 이벤트 리스너 등록
+      document.addEventListener("click", handleClickOutsideSearch);
+    } else {
+      // 모달이 닫히면 이벤트 리스너 제거
+      document.removeEventListener("click", handleClickOutsideSearch);
+    }
+
+    // 클린업 함수에서 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener("click", handleClickOutsideSearch);
+    };
+  }, [searchModalOpen]); // searchModalOpen이 변경될 때마다 실행
 
   // 알림창
   const notiRef = useRef(null);
@@ -53,7 +83,7 @@ const Header = () => {
         </div>
 
         <div className={style.menu}>
-          <div className={style.iconContainer} onClick={handleClickSearchUser}>
+          <div className={style.iconContainer} onClick={openSearchModal}>
             <img
               src={search_user}
               alt="search user"
@@ -61,7 +91,7 @@ const Header = () => {
             />
             <div className={style.overlay}></div>
           </div>
-          <div className={style.iconContainer} onClick={openSearchModal}>
+          <div className={style.iconContainer} onClick={openFeedModal}>
             <img src={add_post} alt="add post" className={style.menuIcon} />
             <div className={style.overlay}></div>
           </div>
@@ -78,7 +108,12 @@ const Header = () => {
       {/* <Notification /> */}
       {/* {notiOpen && <Notification useRef={notiRef} />} */}
       {notiOpen && <Notification />}
-      <FeedModal isOpen={searchModalOpen} closeModal={closeSearchModal} />
+      <FeedModal isOpen={feedModalOpen} closeModal={closeFeedModal} />
+      <SearchUser
+        ref={searchRef}
+        isOpen={searchModalOpen}
+        closeModal={closeSearchModal}
+      />
     </>
   );
 };
