@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/JoinPage.css';
 import { useNavigate } from 'react-router-dom';
 import loginimage from './img/login_logo.svg';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
 import { auth, db } from './firebase/firebase';
 
@@ -15,8 +15,9 @@ const JoinPage = () => {
     techStack: ''
   });
 
-  const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -32,14 +33,18 @@ const JoinPage = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, formData.id, formData.password);
       const user = userCredential.user;
 
+      await sendEmailVerification(user);
+
       await set(ref(db, 'users/' + user.uid), {
         nickname: formData.nickname,
         developmentField: formData.developmentField,
         techStack: formData.techStack
       });
 
-      console.log('회원가입 성공:', formData);
-      navigate('/login');
+      setSuccessMessage('회원가입이 완료되었습니다. 이메일을 확인하여 인증을 완료해주세요.');
+      setTimeout(() => {
+        navigate('/login');
+      }, 3000);
     } catch (error) {
       console.error('회원가입 실패:', error);
       let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
@@ -67,6 +72,7 @@ const JoinPage = () => {
           </div>
 
           {error && <p className="error-message" aria-live="assertive">{error}</p>}
+          {successMessage && <p className="success-message" aria-live="assertive">{successMessage}</p>} {/* 추가된 성공 메시지 */}
 
           <input
             type="text"
@@ -102,9 +108,15 @@ const JoinPage = () => {
             required
           >
             <option value="">개발 분야</option>
-            <option value="frontend">프론트엔드</option>
-            <option value="backend">백엔드</option>
-            <option value="fullstack">풀스택</option>
+            <option value="프론트엔드 개발자">프론트엔드</option>
+            <option value="백엔드 개발자">백엔드</option>
+            <option value="풀스택 개발자">풀스택</option>
+            <option value="웹 개발자">웹</option>
+            <option value="모바일 개발자">모바일</option>
+            <option value="게임 개발자">게임</option>
+            <option value="DB 개발자">DB</option>
+            <option value="임베디드 SW 개발자">임베디드 SW</option>
+            <option value="보안 개발자">보안</option>
           </select>
 
           <select
@@ -114,9 +126,18 @@ const JoinPage = () => {
             required
           >
             <option value="">기술 스택</option>
-            <option value="react">React</option>
-            <option value="nodejs">Node.js</option>
-            <option value="django">Django</option>
+            <option value="React">React</option>
+            <option value="Nodejs">Node.js</option>
+            <option value="Django">Django</option>
+            <option value="C">C</option>
+            <option value="C#">C#</option>
+            <option value="C++">C++</option>
+            <option value="Java">Java</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Swift">Swift</option>
+            <option value="R">R</option>
+            <option value="SQL">SQL</option>
           </select>
 
           <button type="submit">회원가입</button>

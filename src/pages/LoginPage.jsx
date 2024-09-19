@@ -3,9 +3,8 @@ import './css/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import loginimage from './img/login_logo.svg';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase/firebase';
 import { get, ref } from 'firebase/database';
-import { db } from './firebase/firebase';
+import { db, auth } from './firebase/firebase';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
