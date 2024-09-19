@@ -42,10 +42,17 @@ const JoinPage = () => {
       navigate('/login');
     } catch (error) {
       console.error('회원가입 실패:', error);
-      setError('회원가입에 실패했습니다. 다시 시도해주세요.');
+      let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
+      if (error.code === 'auth/email-already-in-use') {
+        errorMessage = '이메일이 이미 사용 중입니다.';
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = '잘못된 이메일 주소입니다.';
+      } else if (error.code === 'auth/weak-password') {
+        errorMessage = '비밀번호가 너무 약합니다.';
+      }
+      setError(errorMessage);
     }
   };
-
 
   return (
     <div className="container">
@@ -56,17 +63,17 @@ const JoinPage = () => {
 
         <form onSubmit={handleSubmit} className="register-form">
           <div className="title">
-            <h1>REGISTER</h1>
+            <h1>회원가입</h1>
           </div>
 
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message" aria-live="assertive">{error}</p>}
 
           <input
             type="text"
             name="nickname"
             value={formData.nickname}
             onChange={handleChange}
-            placeholder="Nickname"
+            placeholder="닉네임"
             required
           />
 
@@ -84,7 +91,7 @@ const JoinPage = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="PW"
+            placeholder="비밀번호"
             required
           />
 
@@ -112,10 +119,10 @@ const JoinPage = () => {
             <option value="django">Django</option>
           </select>
 
-          <button type="submit">SIGN UP</button>
+          <button type="submit">회원가입</button>
 
           <p>
-            Have an account? <a onClick={() => navigate('/login')}>Log in</a>
+            계정이 있으신가요? <a onClick={() => navigate('/login')}>로그인</a>
           </p>
         </form>
       </div>

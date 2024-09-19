@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import style from "../css/FeedModal.module.css";
-import { FaPaperclip, FaImage, FaCode } from "react-icons/fa";
+import { FaImage, FaCode } from "react-icons/fa";
 
 const FeedModal = ({ isOpen, closeModal }) => {
   const [file, setFile] = useState(null);
 
-  const [imagePreview, setImagePreview] = useState(null);
-
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  setFile(file);
-  if (file && file.type.startsWith("image/")) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
-};
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
   if (!isOpen) return null;
 
@@ -26,7 +16,11 @@ const handleFileChange = (event) => {
       <div className={style.modalContent}>
         <form>
           <div>
-            <input type="text" placeholder="제목을 입력하세요" className={style.modalInput} />
+            <input
+              type="text"
+              placeholder="제목을 입력하세요"
+              className={style.modalInput}
+            />
           </div>
           <div>
             <select className={style.modalSelect}>
@@ -44,11 +38,6 @@ const handleFileChange = (event) => {
               placeholder="피드백이 필요한 당신의 코드를 작성해주세요"
               className={style.modalTextarea}
             />
-            {imagePreview && (
-  <div className={style.imagePreview}>
-    <img src={imagePreview} alt="이미지 미리보기" className={style.previewImage} />
-  </div>
-)}
           </div>
           <div className={style.modalBottom}>
             <div className={style.modalFile}>
@@ -71,16 +60,22 @@ const handleFileChange = (event) => {
                     type="file"
                     id="code-block"
                     className={style.fileInput}
-                    disabled
                   />
                 </label>
               </button>
             </div>
             <div className={style.modalActions}>
-              <button type="button" onClick={closeModal} className={style.modalCancelButton}>
+              <button
+                type="button"
+                onClick={closeModal}
+                className={style.modalCancelButton}
+              >
                 취소
               </button>
-              <button type="submit" className={style.modalSubmitButton}>
+              <button
+                type="submit"
+                className={style.modalSubmitButton}
+              >
                 등록
               </button>
             </div>

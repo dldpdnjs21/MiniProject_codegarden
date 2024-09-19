@@ -29,7 +29,12 @@ const LoginPage = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, formData.id, formData.password);
       const user = userCredential.user;
-  
+
+      if (!user.emailVerified) {
+        setError('이메일 인증을 완료하지 않았습니다. 인증 후 다시 시도해주세요.');
+        return;
+      }
+
       const userRef = ref(db, 'users/' + user.uid);
       const snapshot = await get(userRef);
       if (snapshot.exists()) {
@@ -38,11 +43,19 @@ const LoginPage = () => {
       } else {
         console.log('사용자 데이터가 존재하지 않습니다.');
       }
-  
+
       navigate('/main');
     } catch (error) {
       console.error('로그인 실패:', error);
-      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+      let errorMessage = '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.';
+      if (error.code === 'auth/user-not-found') {
+        errorMessage = '사용자를 찾을 수 없습니다.';
+      } else if (error.code === 'auth/wrong-password') {
+        errorMessage = '비밀번호가 올바르지 않습니다.';
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = '잘못된 이메일 주소입니다.';
+      }
+      setError(errorMessage);
     }
   };
 
@@ -55,10 +68,10 @@ const LoginPage = () => {
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="title">
-            <h1>LOGIN</h1>
+            <h1>로그인</h1>
           </div>
 
-          {error && <p className="error-message">{error}</p>} {/* 로그인 실패 메시지 */}
+          {error && <p className="error-message" aria-live="assertive">{error}</p>} {/* 로그인 실패 메시지 */}
 
           <input
             type="email"
@@ -74,14 +87,14 @@ const LoginPage = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="PW"
+            placeholder="비밀번호"
             required
           />
 
-          <button type="submit">LOG IN</button>
+          <button type="submit">로그인</button>
 
           <p>
-            Don't have an account? <a onClick={() => navigate('/join')}>Sign up</a>
+            계정이 없으신가요? <a onClick={() => navigate('/join')}>회원가입</a>
           </p>
         </form>
       </div>
