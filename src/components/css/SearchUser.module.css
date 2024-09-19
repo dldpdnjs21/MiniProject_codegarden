@@ -15,16 +15,38 @@
   background-color: white;
   padding: 40px;
   border-radius: 8px;
-  width: 600px;
-  height: 450px;
+  width: 450px;
+  height: 300px;
   max-width: 90%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
   color: #59705e;
   font-size: 16px;
   font-weight: bold;
+}
+
+.cancelBtn {
+  cursor: pointer;
+  color: #a2a2a2;
+  font-size: 14px;
+}
+
+.searchArea {
+  margin-top: 20px;
+  border-bottom: 1px solid #a2a2a2;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
 }
 
 .searchInput {
@@ -33,19 +55,57 @@
   outline: none;
   font-size: 14px;
   background-color: transparent;
-  padding-left: 5px;
-  padding-bottom: 5px;
-  border-bottom: 2px solid #d4d4d4;
+  width: 100%;
+  /* padding-left: 5px; */
+  /* padding-bottom: 5px; */
+  /* border-bottom: 2px solid #d4d4d4; */
 }
 
 .searchicon {
-  width: 25px;
-  height: 25px;
-  margin-right: 20px;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 2px;
   /* background: none; */
   /* border: none; */
 }
 
+.userList {
+  /* height: 100px;
+  max-height: 100px; */
+  margin: 25px 0;
+}
+
+.userArea {
+  display: flex;
+  margin-bottom: 25px;
+  column-gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profileImg {
+  width: 40px;
+}
+
+.detail {
+  line-height: 16px;
+  font-size: 15px;
+}
+
+.secondLine {
+  line-height: 16px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 14px;
+  color: #878686;
+}
+
+.techStacks {
+  display: flex;
+  column-gap: 2px;
+}
 .modalInput,
 .modalSelect {
   width: 100%;
@@ -80,72 +140,4 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-}
-
-.modalFile {
-  display: flex;
-  align-items: center;
-}
-
-.modalFileButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #848484;
-  font-size: 18px;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.modalCancelButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #a2a2a2;
-  font-size: 18px;
-  font-weight: bold;
-  margin-right: 30px;
-}
-
-.modalSubmitButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #59705e;
-  font-size: 18px;
-  font-weight: bold;
-  margin-right: 20px;
-}
-
-.modalCancelButton:hover {
-  color: #b4b4b4;
-}
-
-.modalSubmitButton:hover {
-  color: #314433;
-}
-
-.icon {
-  font-size: 20px;
-  margin-left: 20px;
-}
-
-.iconLabel {
-  display: flex;
-  align-items: center;
-}
-
-.fileInput {
-  display: none;
-}
-
-.imagePreview {
-  margin-top: 20px;
-}
-
-.previewImage {
-  max-width: 100%;
-  max-height: 200px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
