@@ -27,7 +27,6 @@ const ProfileBox = () => {
         console.log('사용자가 로그인되지 않았습니다.');
       }
     };
-
     fetchUserData();
   }, []);
 

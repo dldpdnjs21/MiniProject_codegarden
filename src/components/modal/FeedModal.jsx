@@ -1,12 +1,58 @@
 import React, { useState } from "react";
 import style from "../css/FeedModal.module.css";
 import { FaImage, FaCode } from "react-icons/fa";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../../pages/firebase/firebase";
+import { ref as dbRef, set } from "firebase/database";
+
 
 const FeedModal = ({ isOpen, closeModal }) => {
   const [file, setFile] = useState(null);
+  const [imageURL, setImageURL] = useState("");
+  const [title, setTitle] = useState("");
+  const [language, setLanguage] = useState("");
+  const [content, setContent] = useState("");
+  const [fileName, setFileName] = useState("");
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setFileName(selectedFile ? selectedFile.name : "");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (file && title && language && content) {
+      const storageRef = ref(storage, `images/${file.name}`);
+      try {
+        // 이미지를 Storage에 업로드
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+        setImageURL(url);
+
+        // 제목, 사용 언어, 피드 내용, 이미지 URL을 Database에 저장
+        const feedRef = dbRef(db, `feeds/${Date.now()}`);
+        const createdAt = new Date().toISOString();
+        await set(feedRef, {
+          title: title,
+          language: language,
+          content: content,
+          imageUrl: url,
+          createdAt: createdAt,
+        });
+
+        setTitle("");
+        setLanguage("");
+        setContent("");
+        setFile(null);
+        setFileName("");
+        closeModal();
+      } catch (error) {
+        console.error("파일 업로드 또는 데이터베이스 저장 실패:", error);
+      }
+    } else {
+      console.log("모든 필드를 입력하세요.");
+    }
   };
 
   if (!isOpen) return null;
@@ -14,17 +60,23 @@ const FeedModal = ({ isOpen, closeModal }) => {
   return (
     <div className={style.modal}>
       <div className={style.modalContent}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <input
               type="text"
               placeholder="제목을 입력하세요"
               className={style.modalInput}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div>
-            <select className={style.modalSelect}>
-              <option value="" disabled selected>
+            <select
+              className={style.modalSelect}
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="" disabled>
                 사용언어
               </option>
               <option value="javascript">JavaScript</option>
@@ -37,6 +89,8 @@ const FeedModal = ({ isOpen, closeModal }) => {
             <textarea
               placeholder="피드백이 필요한 당신의 코드를 작성해주세요"
               className={style.modalTextarea}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
           </div>
           <div className={style.modalBottom}>
@@ -53,6 +107,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
                   />
                 </label>
               </button>
+              {fileName && <span className={style.fileName}>{fileName}</span>}
               <button type="button" className={style.modalFileButton}>
                 <label htmlFor="code-block" className={style.iconLabel}>
                   <FaCode className={style.icon} />
