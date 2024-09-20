@@ -1,0 +1,9 @@
+.wrap {
+  /* border-radius: 10px; */
+  background-color: #d9d9d9;
+  position: relative;
+  padding: 20px;
+  width: 300px;
+  /* top: -30px; */
+  margin-left: 80px;
+}

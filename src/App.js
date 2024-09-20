@@ -12,6 +12,7 @@ import Login from "./pages/LoginPage";
 import Join from "./pages/JoinPage";
 import Main from "./pages/MainPage";
 import Header from "./components/Header";
+import MyPage from "./pages/MyPage";
 
 const App = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/main" element={<Main />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </div>
   );

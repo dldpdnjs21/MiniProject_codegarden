@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  align-items: center;
+}
+.profileImg {
+  width: 200px;
+  cursor: pointer;
+}
+.form {
+  display: flex;
+  gap: 20px;
+  margin-top: 50px;
+}
+.inputArea {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 400px;
+}
+.label {
+  color: #807f81;
+  width: 60px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.inputBox {
+  border: none;
+  border-radius: 10px;
+  width: 300px;
+  background-color: #d9d9d9;
+  /* line-height: 30px; */
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.textBox {
+  border: none;
+  border-radius: 10px;
+  width: 300px;
+  background-color: #d9d9d9;
+  font-size: 14px;
+  resize: none;
+  padding: 8px 10px;
+}
+
+select {
+  width: 100%;
+
+  height: 100%;
+
+  padding: 8px 28px 8px 10px;
+
+  font-size: 14px;
+  border: 0;
+
+  -webkit-appearance: none; /* for chrome */
+
+  -moz-appearance: none; /*for firefox*/
+
+  appearance: none;
+
+  box-sizing: border-box;
+
+  background: transparent;
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none; /*for IE10,11*/
+}
+
+.selectBox {
+  border: none;
+  border-radius: 10px;
+  width: 300px;
+  font-size: 14px;
+  background: url("../img/down_arrow.svg") no-repeat 95% 50% #d9d9d9;
+}
+
+.addStack {
+  border-radius: 10px;
+  width: 300px;
+  font-size: 14px;
+  background: url("../img/down_arrow.svg") no-repeat 95% 50% #d9d9d9;
+  padding: 8px 10px;
+  cursor: pointer;
+}
