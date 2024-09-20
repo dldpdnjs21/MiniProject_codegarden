@@ -3,6 +3,7 @@ import style from "./css/MyBox.module.css";
 import line from "./img/line.svg";
 import EditProfile from "./EditProfile";
 import MyFeed from "./MyFeed";
+import TechStackSelect from "./dropdown/TechStackSelect";
 
 const MyBox = () => {
   const [editProfile, setEditProfile] = useState(true);

@@ -17,6 +17,8 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
+  width: 400px;
 }
 .label {
   color: #807f81;
@@ -28,6 +30,7 @@
   flex-direction: column;
   gap: 30px;
 }
+
 .inputBox {
   border: none;
   border-radius: 10px;
@@ -67,6 +70,7 @@ select {
   box-sizing: border-box;
 
   background: transparent;
+  cursor: pointer;
 }
 select::-ms-expand {
   display: none; /*for IE10,11*/
@@ -78,4 +82,13 @@ select::-ms-expand {
   width: 300px;
   font-size: 14px;
   background: url("../img/down_arrow.svg") no-repeat 95% 50% #d9d9d9;
+}
+
+.addStack {
+  border-radius: 10px;
+  width: 300px;
+  font-size: 14px;
+  background: url("../img/down_arrow.svg") no-repeat 95% 50% #d9d9d9;
+  padding: 8px 10px;
+  cursor: pointer;
 }

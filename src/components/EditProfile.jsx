@@ -1,22 +1,9 @@
 import profileImg from "./img/default_profile.svg";
 import style from "./css/EditProfile.module.css";
 import { useState } from "react";
+import TechStackSelect from "./dropdown/TechStackSelect";
 
 const EditProfile = () => {
-  //   const profile = {
-  //     nickname: "코드가든",
-  //     developmentField: "프론트엔드 개발자",
-  //     techStacks: [
-  //       { name: "React", color: "61DAFB" },
-  //       { name: "JavaScript", color: "F7DF1E" },
-  //     ],
-  //   };
-  const techStackData = [
-    { name: "React", color: "61DAFB" },
-    { name: "JavaScript", color: "F7DF1E" },
-    { name: "Spring", color: "6DB33F" },
-  ];
-
   const [formData, setFormData] = useState({
     nickname: "코드가든",
     developmentField: "frontend",
@@ -35,13 +22,9 @@ const EditProfile = () => {
   };
 
   const [checkedList, setCheckedList] = useState(formData.techStacks);
-  const [checked, setChecked] = useState(false); //체크 여부 판단
   const handleCheck = (isChecked, item) => {
     let techStackList = formData.techStacks;
     if (isChecked) {
-      //   checkItems.add(item);
-      //   setCheckItems(checkItems);
-      //   console.log(checkItems);
       techStackList = [...techStackList, item];
       console.log(techStackList);
       setCheckedList(techStackList);
@@ -54,21 +37,13 @@ const EditProfile = () => {
       techStacks: techStackList,
     });
   };
-  //   const handleChecked = ({ target }) => {
-  //     setChecked(!checked);
-  //     console.log(target);
-  //     // checkItemHandler()
-  //   };
+
+  const [stackBoxOpen, setStackBoxOpen] = useState(false);
+
   return (
     <div className={style.container}>
       <img src={profileImg} className={style.profileImg} />
       <div className={style.form}>
-        {/* <div className={style.labels}>
-          <div className={style.label}>닉네임</div>
-          <div className={style.label}>개발분야</div>
-          <div className={style.label}>기술스택</div>
-          <div className={style.label}>내 소개</div>
-        </div> */}
         <div className={style.inputs}>
           <div className={style.inputArea}>
             <div className={style.label}>닉네임</div>
@@ -99,18 +74,20 @@ const EditProfile = () => {
           </div>
           <div className={style.inputArea}>
             <div className={style.label}>기술스택</div>
-            {techStackData.map((item) => (
-              <div>
-                <input
-                  type="checkbox"
-                  onChange={(e) => handleCheck(e.target.checked, item)}
-                  checked={
-                    checkedList.some((i) => i.name === item.name) ? true : false
-                  }
-                />
-                {item.name}
-              </div>
-            ))}
+            <div
+              className={style.addStack}
+              onClick={() => {
+                setStackBoxOpen((prev) => !prev);
+              }}
+            >
+              기술스택 추가
+            </div>
+            {stackBoxOpen && (
+              <TechStackSelect
+                handleCheck={handleCheck}
+                checkedList={checkedList}
+              />
+            )}
           </div>
           <div className={style.inputArea}>
             <div className={style.label}>내 소개</div>
