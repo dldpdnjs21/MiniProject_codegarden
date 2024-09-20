@@ -11,6 +11,19 @@
   z-index: 1;
 }
 
+.fileRemoveButton{
+  margin-left: 10px;
+  font-weight: bold;
+  color: #bcc3b6;
+  font-size: 20px;
+
+}
+
+.fileName {
+  margin-left: 40px;
+  font-size: 13.5px;
+}
+
 .modalContent {
   background-color: white;
   padding: 50px 60px;

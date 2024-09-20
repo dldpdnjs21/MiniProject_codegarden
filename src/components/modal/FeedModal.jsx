@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "../css/FeedModal.module.css";
 import { FaImage, FaCode } from "react-icons/fa";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../../pages/firebase/firebase";
-import { ref as dbRef, set } from "firebase/database";
-
+import { ref as dbRef, set, get } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const FeedModal = ({ isOpen, closeModal }) => {
   const [file, setFile] = useState(null);
@@ -13,6 +13,23 @@ const FeedModal = ({ isOpen, closeModal }) => {
   const [language, setLanguage] = useState("");
   const [content, setContent] = useState("");
   const [fileName, setFileName] = useState("");
+  const [nickname, setNickname] = useState("");
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = dbRef(db, 'users/' + user.uid);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          setNickname(userData.nickname || "Anonymous");
+        } else {
+          console.log('사용자 데이터가 존재하지 않습니다.');
+        }
+      }
+    });
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -25,12 +42,13 @@ const FeedModal = ({ isOpen, closeModal }) => {
     if (file && title && language && content) {
       const storageRef = ref(storage, `images/${file.name}`);
       try {
+
         // 이미지를 Storage에 업로드
         await uploadBytes(storageRef, file);
         const url = await getDownloadURL(storageRef);
         setImageURL(url);
 
-        // 제목, 사용 언어, 피드 내용, 이미지 URL을 Database에 저장
+        // 제목, 사용 언어, 피드 내용, 이미지 URL, 닉네임을 Database에 저장
         const feedRef = dbRef(db, `feeds/${Date.now()}`);
         const createdAt = new Date().toISOString();
         await set(feedRef, {
@@ -39,6 +57,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
           content: content,
           imageUrl: url,
           createdAt: createdAt,
+          nickname: nickname,
         });
 
         setTitle("");
@@ -107,7 +126,6 @@ const FeedModal = ({ isOpen, closeModal }) => {
                   />
                 </label>
               </button>
-              {fileName && <span className={style.fileName}>{fileName}</span>}
               <button type="button" className={style.modalFileButton}>
                 <label htmlFor="code-block" className={style.iconLabel}>
                   <FaCode className={style.icon} />
@@ -118,6 +136,21 @@ const FeedModal = ({ isOpen, closeModal }) => {
                   />
                 </label>
               </button>
+                {fileName && (
+                  <div className={style.fileInfo}>
+                    <span className={style.fileName}>첨부파일 : {fileName}</span>
+                    <a
+                      onClick={() => {
+                        setFile(null);
+                        setFileName("");
+                        document.getElementById("image-upload").value = null;
+                      }}
+                      className={style.fileRemoveButton}
+                    >
+                      x
+                    </a>
+                  </div>
+                )}
             </div>
             <div className={style.modalActions}>
               <button
