@@ -4,14 +4,14 @@ const TechStackSelect = ({ handleCheck, checkedList }) => {
     { name: "React", color: "61DAFB" },
     { name: "JavaScript", color: "F7DF1E" },
     { name: "Spring", color: "6DB33F" },
-    // { name: "React", color: "61DAFB" },
-    // { name: "JavaScript", color: "F7DF1E" },
-    // { name: "Spring", color: "6DB33F" },
-    // { name: "React", color: "61DAFB" },
-    // { name: "JavaScript", color: "F7DF1E" },
-    // { name: "Spring", color: "6DB33F" },
-    // { name: "React", color: "61DAFB" },
-    // { name: "JavaScript", color: "F7DF1E" },
+    { name: "Node.js", color: "61DAFB" },
+    { name: "C", color: "F7DF1E" },
+    { name: "C++", color: "6DB33F" },
+    { name: "Next.js", color: "61DAFB" },
+    { name: "Java", color: "F7DF1E" },
+    { name: "Python", color: "6DB33F" },
+    { name: "React", color: "61DAFB" },
+    { name: "JavaScript", color: "F7DF1E" },
   ];
   return (
     <div className={style.wrap}>
@@ -24,6 +24,7 @@ const TechStackSelect = ({ handleCheck, checkedList }) => {
             checked={
               checkedList.some((i) => i.name === item.name) ? true : false
             }
+            className={style.checkbox}
           />
           {item.name}
         </div>

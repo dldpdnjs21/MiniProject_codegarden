@@ -1,99 +1,113 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f2f2f2;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  .title h1{
-    margin-left: 24px;
-  }
-  
-  .register-box {
-    display: flex;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 1070px;
-    height: 600px;
-    text-align: center;
-  }
-  
-  .title h1 {
-    text-align: left;
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .illustration{
-    flex: 1;
-    width: 50%;
-    margin: auto;
-  }
-  .illustration img {
-    width: 100%;
-    max-width: 370px;
-    margin: 0 auto;
-  }
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f2f2f2;
+}
 
-  .register-form{
-    flex: 1;
-    width: 50%;
-    margin: auto;
-    padding: 0 20px;
-  }
-  
-  .register-form input, .register-form select {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .register-form input::placeholder {
-    color: #888;
-  }
-  
-  .register-form button {
-    width: 90%;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .register-form button:hover {
-    background-color: gray;
-  }
-  
-  p {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  p a {
-    color: black;
-    text-decoration: none;
-  }
-  
-  p a:hover {
-    text-decoration: underline;
-  }
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.title h1 {
+  margin-left: 24px;
+}
+
+.register-box {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 1070px;
+  height: 600px;
+  text-align: center;
+}
+
+.title h1 {
+  text-align: left;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.illustration {
+  flex: 1;
+  width: 50%;
+  margin: auto;
+}
+.illustration img {
+  width: 100%;
+  max-width: 370px;
+  margin: 0 auto;
+}
+
+.register-form {
+  flex: 1;
+  width: 50%;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.register-form input {
+  width: 90%;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.register-form select {
+  padding: 8px 28px 8px 10px;
+  /* margin-bottom: 15px; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.register-form input::placeholder {
+  color: #888;
+}
+
+.register-form button {
+  width: 90%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.register-form button:hover {
+  background-color: gray;
+}
+
+p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+p a {
+  color: black;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+.select-wrap {
+  width: 90%;
+  margin: 0 auto 15px auto;
+  background: url("../../components/img/down_arrow.svg") no-repeat 97% 50%;
+}
