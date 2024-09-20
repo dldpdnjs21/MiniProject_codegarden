@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  align-items: center;
+}
+.profileImg {
+  width: 200px;
+  cursor: pointer;
+}
+.form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+.labels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.label {
+  color: #807f81;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.inputArea {
+  display: flex;
+  gap: 5px;
+}
