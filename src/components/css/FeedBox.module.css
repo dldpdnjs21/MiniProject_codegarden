@@ -4,6 +4,15 @@
   width: 764px;
   margin-left: auto;
   background-color: white;
-  padding: 20px;
+  padding: 8%;
   margin-top: 15px;
+}
+
+
+.feedImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
