@@ -74,6 +74,7 @@ const EditProfile = () => {
               value={formData.nickname}
               onChange={handleChange}
               className={style.inputBox}
+              readOnly
             />
           </div>
           <div className={style.inputArea}>
@@ -102,7 +103,7 @@ const EditProfile = () => {
                 setStackBoxOpen((prev) => !prev);
               }}
             >
-              기술스택 수정
+              기술스택
             </div>
             {stackBoxOpen && (
               <TechStackSelect
