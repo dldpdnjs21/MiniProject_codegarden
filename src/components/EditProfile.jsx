@@ -98,7 +98,9 @@ const EditProfile = () => {
           <div className={style.inputArea}>
             <div className={style.label}>기술스택</div>
             <div
-              className={style.addStack}
+              className={`${style.addStack} ${
+                stackBoxOpen ? style.addStackOpened : ""
+              }`}
               onClick={() => {
                 setStackBoxOpen((prev) => !prev);
               }}

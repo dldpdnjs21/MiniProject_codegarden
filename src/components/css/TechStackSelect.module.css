@@ -2,8 +2,8 @@
   /* border-radius: 10px; */
   /* background-color: #d9d9d9; */
   position: relative;
-  padding: 0 20px;
-  width: 300px;
+  padding-left: 3px;
+  width: 320px;
   /* top: -20px; */
   margin-left: 80px;
   display: flex;
@@ -11,6 +11,12 @@
   gap: 10px;
 }
 
-.checkbox {
-  margin-right: 5px;
-}
+.checkbox input[type="checkbox"] + label {
+  display: inline-block; 
+  position: relative;
+   padding-left: 5px; /* 글자와 체크박스 사이의 간격을 변경 */
+   cursor: pointer;
+   width: 85px;
+   line-height: 28px;
+  }
+

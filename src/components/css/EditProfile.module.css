@@ -97,6 +97,10 @@ select::-ms-expand {
   /* margin-left: 80px; */
 }
 
+.addStackOpened {
+  background: url("../img/up_arrow.svg") no-repeat 95% 50%;
+}
+
 .stackList {
   display: flex;
   gap: 5px;

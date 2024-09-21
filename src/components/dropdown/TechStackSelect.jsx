@@ -23,15 +23,16 @@ const TechStackSelect = ({ handleCheck, checkedList }) => {
     <div className={style.wrap}>
       {/* <div>기술스택</div> */}
       {techStackList.map((item) => (
-        <div>
+        <div className={style.checkbox}>
           <input
             type="checkbox"
             onChange={(e) => handleCheck(e.target.checked, item)}
             checked={
               checkedList.some((i) => i.name === item.name) ? true : false
             }
+            id={item.name}
           />
-          {item.name}
+          <label for={item.name}>{item.name}</label>
         </div>
       ))}
     </div>
