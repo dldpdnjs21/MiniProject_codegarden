@@ -4,16 +4,14 @@ import style from './css/ProfileBox.module.css';
 import profileImg from './img/default_profile.svg';
 import { auth, db } from '../pages/firebase/firebase';
 import { ref, get } from 'firebase/database';
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 const ProfileBox = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const user = auth.currentUser;
-
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userRef = ref(db, 'users/' + user.uid);
         const snapshot = await get(userRef);
@@ -25,23 +23,26 @@ const ProfileBox = () => {
         }
       } else {
         console.log('사용자가 로그인되지 않았습니다.');
+        setUserData(null);
       }
-    };
-    fetchUserData();
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const handleClickMypage = () => {
     navigate('/mypage');
   };
 
-  const handleClickLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log('로그아웃 성공');
-      navigate('/login');
-    } catch (error) {
-      console.error('로그아웃 실패:', error);
-    }
+  const handleClickLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('로그아웃 성공');
+        navigate('/login');
+      })
+      .catch((error) => {
+        console.error('로그아웃 실패:', error);
+      });
   };
 
   return (
@@ -50,7 +51,6 @@ const ProfileBox = () => {
         <div className={style.profileWrap}>
           <img src={profileImg} className={style.profileImg} alt="Profile" />
           <div>
-            {/* userData가 null인지 확인 */}
             <div className={style.nickname}>
               {userData ? userData.nickname : '닉네임 없음'}
             </div>
