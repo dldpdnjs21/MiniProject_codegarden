@@ -2,7 +2,7 @@
 import React from "react";
 import ProfileBox from "../components/ProfileBox";
 import style from "./css/MainPage.module.css";
-import FeedBox from "../components/FeedBox";
+import FeedBox from "../components/Feed/FeedBox";
 import HeadBox from "../components/HeadBox";
 const MainPage = () => {
   return (

@@ -41,34 +41,29 @@ const FeedModal = ({ isOpen, closeModal }) => {
     e.preventDefault();
     if (file && title && language && content) {
       const storageRef = ref(storage, `images/${file.name}`);
-      try {
+      // 이미지를 Storage에 업로드
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      setImageURL(url);
 
-        // 이미지를 Storage에 업로드
-        await uploadBytes(storageRef, file);
-        const url = await getDownloadURL(storageRef);
-        setImageURL(url);
+      // 제목, 사용 언어, 피드 내용, 이미지 URL, 닉네임을 Database에 저장
+      const feedRef = dbRef(db, `feeds/${Date.now()}`);
+      const createdAt = new Date().toISOString();
+      await set(feedRef, {
+        title: title,
+        language: language,
+        content: content,
+        imageUrl: url,
+        createdAt: createdAt,
+        nickname: nickname,
+      });
 
-        // 제목, 사용 언어, 피드 내용, 이미지 URL, 닉네임을 Database에 저장
-        const feedRef = dbRef(db, `feeds/${Date.now()}`);
-        const createdAt = new Date().toISOString();
-        await set(feedRef, {
-          title: title,
-          language: language,
-          content: content,
-          imageUrl: url,
-          createdAt: createdAt,
-          nickname: nickname,
-        });
-
-        setTitle("");
-        setLanguage("");
-        setContent("");
-        setFile(null);
-        setFileName("");
-        closeModal();
-      } catch (error) {
-        console.error("파일 업로드 또는 데이터베이스 저장 실패:", error);
-      }
+      setTitle("");
+      setLanguage("");
+      setContent("");
+      setFile(null);
+      setFileName("");
+      closeModal();
     } else {
       console.log("모든 필드를 입력하세요.");
     }
