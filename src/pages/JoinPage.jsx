@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { ref, set } from "firebase/database";
 import { auth, db } from "./firebase/firebase";
+import TechStackSelect from "../components/dropdown/TechStackSelect";
+import TechStackBadge from "../components/TechStackBadge";
 
 const JoinPage = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +17,7 @@ const JoinPage = () => {
     id: "",
     password: "",
     developmentField: "",
-    techStack: "",
+    techStacks: [],
   });
 
   const [error, setError] = useState("");
@@ -29,6 +31,24 @@ const JoinPage = () => {
     });
   };
 
+  const [checkedList, setCheckedList] = useState(formData.techStacks);
+  const handleCheck = (isChecked, item) => {
+    let techStackList = formData.techStacks;
+    if (isChecked) {
+      techStackList = [...techStackList, item];
+      console.log(techStackList);
+      setCheckedList(techStackList);
+    } else {
+      techStackList = techStackList.filter((t) => t.name !== item.name);
+      setCheckedList(techStackList);
+    }
+    setFormData({
+      ...formData,
+      techStacks: techStackList,
+    });
+  };
+
+  const [stackBoxOpen, setStackBoxOpen] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,7 +65,8 @@ const JoinPage = () => {
       await set(ref(db, "users/" + user.uid), {
         nickname: formData.nickname,
         developmentField: formData.developmentField,
-        techStack: formData.techStack,
+        techStacks: formData.techStacks,
+        introduce: "",
       });
 
       setSuccessMessage(
@@ -84,7 +105,7 @@ const JoinPage = () => {
               name="nickname"
               value={formData.nickname}
               onChange={handleChange}
-              placeholder="닉네임"
+              placeholder="닉네임 (추후 변경불가)"
               required
             />
             <input
@@ -122,8 +143,8 @@ const JoinPage = () => {
                 <option value="보안 개발자">보안</option>
               </select>
             </div>
-            <div className="select-wrap">
-              <select
+            {/* <div className="select-wrap"> */}
+            {/* <select
                 name="techStack"
                 value={formData.techStack}
                 onChange={handleChange}
@@ -142,8 +163,31 @@ const JoinPage = () => {
                 <option value="Swift">Swift</option>
                 <option value="R">R</option>
                 <option value="SQL">SQL</option>
-              </select>
+              </select> */}
+            {/* </div> */}
+            <div
+              className={`addStack ${stackBoxOpen ? "addStackOpened" : ""}`}
+              onClick={() => {
+                setStackBoxOpen((prev) => !prev);
+              }}
+            >
+              {checkedList.length > 0
+                ? checkedList.map((item, index) => {
+                    if (index === checkedList.length - 1) return item.name;
+                    else return item.name + ", ";
+                  })
+                : "기술스택"}
             </div>
+            {stackBoxOpen && (
+              // <div className="techStacks">
+              <TechStackSelect
+                handleCheck={handleCheck}
+                checkedList={checkedList}
+                wrap="wrap"
+                checkbox="checkbox"
+              />
+              // </div>
+            )}
             {/* 에러 */}
             {error && !successMessage && (
               <p className="error message" aria-live="assertive">

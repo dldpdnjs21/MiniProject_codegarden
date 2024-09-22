@@ -1,5 +1,4 @@
-import style from "../css/TechStackSelect.module.css";
-const TechStackSelect = ({ handleCheck, checkedList }) => {
+const TechStackSelect = ({ handleCheck, checkedList, wrap, checkbox }) => {
   const techStackList = [
     { name: "Java", color: "007396" },
     { name: "JavaScript", color: "F7DF1E" },
@@ -20,10 +19,10 @@ const TechStackSelect = ({ handleCheck, checkedList }) => {
   ];
 
   return (
-    <div className={style.wrap}>
+    <div className={wrap}>
       {/* <div>기술스택</div> */}
       {techStackList.map((item) => (
-        <div className={style.checkbox}>
+        <div className={checkbox}>
           <input
             type="checkbox"
             onChange={(e) => handleCheck(e.target.checked, item)}
