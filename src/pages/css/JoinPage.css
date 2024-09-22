@@ -11,7 +11,7 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   height: 100vh;
 }
@@ -52,7 +52,8 @@ body {
 .register-form {
   flex: 1;
   width: 50%;
-  margin: auto;
+  /* margin: auto; */
+  margin-top: 103px;
   padding: 0 20px;
 }
 
@@ -111,4 +112,16 @@ p a:hover {
   width: 90%;
   margin: 0 auto 15px auto;
   background: url("../../components/img/down_arrow.svg") no-repeat 97% 50%;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.error {
+  color: #f54040;
+}
+
+.success {
+  color: #2956f6;
 }

@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #f2f2f2;
 }
 
@@ -38,7 +38,7 @@ body {
   color: #67b345;
 }
 
-.illustration{
+.illustration {
   flex: 1;
   width: 50%;
   margin: auto;
@@ -50,14 +50,15 @@ body {
   padding: 0 20px;
 }
 
-.login-form{
+.login-form {
   flex: 1;
   width: 50%;
-  margin: auto;
+  margin-top: 157px;
   padding: 0 20px;
 }
 
-.login-form input, .login-form select {
+.login-form input,
+.login-form select {
   width: 90%;
   padding: 10px;
   margin-bottom: 15px;
@@ -97,4 +98,8 @@ p a {
 
 p a:hover {
   text-decoration: underline;
+}
+
+.error {
+  margin-top: 0;
 }
