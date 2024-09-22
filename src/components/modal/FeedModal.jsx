@@ -19,13 +19,13 @@ const FeedModal = ({ isOpen, closeModal }) => {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userRef = dbRef(db, 'users/' + user.uid);
+        const userRef = dbRef(db, "users/" + user.uid);
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const userData = snapshot.val();
           setNickname(userData.nickname || "Anonymous");
         } else {
-          console.log('사용자 데이터가 존재하지 않습니다.');
+          console.log("사용자 데이터가 존재하지 않습니다.");
         }
       }
     });
@@ -84,9 +84,8 @@ const FeedModal = ({ isOpen, closeModal }) => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          <div>
+          <div className={style.modalSelect}>
             <select
-              className={style.modalSelect}
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
             >
@@ -131,21 +130,21 @@ const FeedModal = ({ isOpen, closeModal }) => {
                   />
                 </label>
               </button>
-                {fileName && (
-                  <div className={style.fileInfo}>
-                    <span className={style.fileName}>첨부파일 : {fileName}</span>
-                    <a
-                      onClick={() => {
-                        setFile(null);
-                        setFileName("");
-                        document.getElementById("image-upload").value = null;
-                      }}
-                      className={style.fileRemoveButton}
-                    >
-                      x
-                    </a>
-                  </div>
-                )}
+              {fileName && (
+                <div className={style.fileInfo}>
+                  <span className={style.fileName}>첨부파일 : {fileName}</span>
+                  <a
+                    onClick={() => {
+                      setFile(null);
+                      setFileName("");
+                      document.getElementById("image-upload").value = null;
+                    }}
+                    className={style.fileRemoveButton}
+                  >
+                    x
+                  </a>
+                </div>
+              )}
             </div>
             <div className={style.modalActions}>
               <button
@@ -155,10 +154,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
               >
                 취소
               </button>
-              <button
-                type="submit"
-                className={style.modalSubmitButton}
-              >
+              <button type="submit" className={style.modalSubmitButton}>
                 등록
               </button>
             </div>

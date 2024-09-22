@@ -85,7 +85,6 @@ const EditProfile = () => {
                 //   value={formData.developmentField}
                 onChange={handleChange}
                 defaultValue={formData.developmentField}
-                className={style.textarea}
                 required
               >
                 <option value="">개발 분야</option>

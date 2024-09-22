@@ -83,7 +83,7 @@ select::-ms-expand {
   border-radius: 5px;
   width: 320px;
   font-size: 14px;
-  background: url("../img/down_arrow.svg") no-repeat 95% 50%;
+  background: url("../img/down_arrow.svg") no-repeat 96% 50%;
 }
 
 .addStack {
@@ -91,14 +91,14 @@ select::-ms-expand {
   border-radius: 5px;
   width: 320px;
   font-size: 14px;
-  background: url("../img/down_arrow.svg") no-repeat 95% 50%;
+  background: url("../img/down_arrow.svg") no-repeat 96% 50%;
   padding: 5px 10px;
   cursor: pointer;
   /* margin-left: 80px; */
 }
 
 .addStackOpened {
-  background: url("../img/up_arrow.svg") no-repeat 95% 50%;
+  background: url("../img/up_arrow.svg") no-repeat 96% 50%;
 }
 
 .stackList {
