@@ -8,6 +8,13 @@
   margin-top: 15px;
 }
 
+.feedUser {
+  display: flex;
+}
+
+.authorImg {
+  width: 30px;
+}
 
 .feedImage {
   display: flex;

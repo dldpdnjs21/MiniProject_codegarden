@@ -9,11 +9,11 @@ import {
 import { ref, set } from "firebase/database";
 import { auth, db } from "./firebase/firebase";
 import TechStackSelect from "../components/dropdown/TechStackSelect";
-import TechStackBadge from "../components/TechStackBadge";
 
 const JoinPage = () => {
   const [formData, setFormData] = useState({
     nickname: "",
+    profileImg: "",
     id: "",
     password: "",
     developmentField: "",
@@ -139,7 +139,7 @@ const JoinPage = () => {
                 <option value="모바일 개발자">모바일</option>
                 <option value="게임 개발자">게임</option>
                 <option value="DB 개발자">DB</option>
-                <option value="임베디드 SW 개발자">임베디드 SW</option>
+                <option value="임베디드SW 개발자">임베디드SW</option>
                 <option value="보안 개발자">보안</option>
               </select>
             </div>

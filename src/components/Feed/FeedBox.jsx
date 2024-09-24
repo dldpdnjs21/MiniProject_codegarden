@@ -2,43 +2,36 @@ import React, { useState, useEffect } from "react";
 import { ref as dbRef, get, push, set, remove } from "firebase/database";
 import { auth, db } from "../../pages/firebase/firebase";
 import style from "../css/FeedBox.module.css";
+import { useComments } from "./Comments";
+import default_profile from "../img/default_profile.svg";
 
 const FeedBox = () => {
   const [feeds, setFeeds] = useState([]);
-  const [comments, setComments] = useState({});
-  const [newComment, setNewComment] = useState({});
-
-  // 피드 가져오기
-  const fetchFeeds = async () => {
-    const feedsRef = dbRef(db, "feeds");
-    const snapshot = await get(feedsRef);
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      const feedsArray = Object.entries(data);
-      feedsArray.reverse(); // 피드 조회 순서 최신순으로
-      setFeeds(feedsArray);
-    }
-  };
-
-  // 댓글 가져오기
-  const fetchComments = async (feedId) => {
-    const commentsRef = dbRef(db, `feeds/${feedId}/comments`);
-    const snapshot = await get(commentsRef);
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      setComments((prevComments) => ({
-        ...prevComments,
-        [feedId]: Object.entries(data),
-      }));
-    } else {
-      setComments((prevComments) => ({
-        ...prevComments,
-        [feedId]: [],
-      }));
-    }
-  };
+  const {
+    comments,
+    fetchComments,
+    handleCommentSubmit,
+    handleCommentChange,
+    handleCommentDelete,
+    newComment,
+  } = useComments();
 
   useEffect(() => {
+    // 피드 가져오기
+    const fetchFeeds = async () => {
+      const feedsRef = dbRef(db, "feeds");
+      const snapshot = await get(feedsRef);
+      if (snapshot.exists()) {
+        // console.log(snapshot.val());
+
+        const data = snapshot.toJSON();
+        const feedsArray = Object.entries(data);
+
+        feedsArray.reverse(); // 피드 조회 순서 최신순으로
+        setFeeds(feedsArray);
+      }
+    };
+
     fetchFeeds();
   }, []);
 
@@ -48,108 +41,168 @@ const FeedBox = () => {
     });
   }, [feeds]);
 
-  const handleCommentSubmit = async (e, feedId) => {
-    e.preventDefault();
-    const commentText = newComment[feedId];
-    const user = auth.currentUser;
+  // 댓글 가져오기
+  // const fetchComments = async (feedId) => {
+  //   const commentsRef = dbRef(db, `feeds/${feedId}/comments`);
+  //   const snapshot = await get(commentsRef);
+  //   if (snapshot.exists()) {
+  //     const data = snapshot.val();
+  //     setComments((prevComments) => ({
+  //       ...prevComments,
+  //       [feedId]: Object.entries(data),
+  //     }));
+  //   } else {
+  //     setComments((prevComments) => ({
+  //       ...prevComments,
+  //       [feedId]: [],
+  //     }));
+  //   }
+  // };
 
-    if (!user) return;
+  // useEffect(() => {
+  //   fetchFeeds();
+  // }, []);
 
-    const userRef = dbRef(db, `users/${user.uid}`);
-    const userSnapshot = await get(userRef);
-    const userData = userSnapshot.val();
-    if (!userData) return;
+  // useEffect(() => {
+  //   feeds.forEach(([feedId]) => {
+  //     fetchComments(feedId);
+  //   });
+  // }, [feeds]);
 
-    if (commentText) {
-      const commentsRef = dbRef(db, `feeds/${feedId}/comments`);
-      const newCommentRef = push(commentsRef);
-      await set(newCommentRef, {
-        text: commentText,
-        createdAt: new Date().toISOString(),
-        nickname: userData.nickname,
-        userId: user.uid,
-      });
+  // const handleCommentSubmit = async (e, feedId) => {
+  //   e.preventDefault();
+  //   const commentText = newComment[feedId];
+  //   const user = auth.currentUser;
 
-      setNewComment((prev) => ({
-        ...prev,
-        [feedId]: "",
-      }));
+  //   if (!user) return;
 
-      fetchComments(feedId);
+  //   const userRef = dbRef(db, `users/${user.uid}`);
+  //   const userSnapshot = await get(userRef);
+  //   const userData = userSnapshot.val();
+  //   if (!userData) return;
+
+  //   if (commentText) {
+  //     const commentsRef = dbRef(db, `feeds/${feedId}/comments`);
+  //     const newCommentRef = push(commentsRef);
+  //     await set(newCommentRef, {
+  //       text: commentText,
+  //       createdAt: new Date().toISOString(),
+  //       nickname: userData.nickname,
+  //       userId: user.uid,
+  //     });
+
+  //     setNewComment((prev) => ({
+  //       ...prev,
+  //       [feedId]: "",
+  //     }));
+
+  //     fetchComments(feedId);
+  //   }
+  // };
+
+  // const handleCommentDelete = (feedId, commentId) => async () => {
+  //   const user = auth.currentUser;
+  //   if (!user) return;
+
+  //   const commentRef = dbRef(db, `feeds/${feedId}/comments/${commentId}`);
+  //   await remove(commentRef);
+  //   fetchComments(feedId);
+  // };
+
+  // 피드 작성자 정보 가져오기
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    async function fetchAuthor(uid) {
+      const userRef = dbRef(db, `users/${uid}`);
+      const userSnapshot = await get(userRef);
+
+      if (userSnapshot.exists()) {
+        setUserData((data) => [...data, userSnapshot.val()]);
+      }
     }
-  };
 
-  const handleCommentDelete = (feedId, commentId) => async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-
-    const commentRef = dbRef(db, `feeds/${feedId}/comments/${commentId}`);
-    await remove(commentRef);
-    fetchComments(feedId);
-  };
+    if (feeds.length) {
+      feeds.forEach((element) => {
+        fetchAuthor(element[1].authorUid);
+      });
+    }
+  }, [feeds]);
 
   return (
-    <div className={style.feedContainer}>
-      {feeds.map(([feedId, feed]) => (
-        <div key={feedId} className={style.feed}>
-          <div className={style.feedUser}>
-            <h2>{feed.nickname || "닉네임 없음"}</h2>
-          </div>
-          <h2>{feed.title}</h2>
-          <p>사용 언어: {feed.language}</p>
-          <p>등록 시간: {new Date(feed.createdAt).toLocaleString()}</p>
-          <p>{feed.content}</p>
-          {feed.imageUrl && (
-            <img
-              src={feed.imageUrl}
-              alt="피드 이미지"
-              className={style.feedImage}
-            />
-          )}
+    <div>
+      {userData.length &&
+        userData.map((element) => <h2>{element.nickname}</h2>)}
 
-          <div className={style.commentList}>
-            {comments[feedId] &&
-              comments[feedId].map(([commentId, comment]) => (
-                <div key={commentId} className={style.comment}>
-                  <p>
-                    <strong>{comment.nickname || "닉네임 없음"}</strong>:{" "}
-                    {comment.text}
-                  </p>
-                  <span>{new Date(comment.createdAt).toLocaleString()}</span>
-                  {auth.currentUser?.uid === comment.userId && (
-                    <button
-                      onClick={handleCommentDelete(feedId, commentId)}
-                      className={style.deleteButton}
-                    >
-                      삭제
-                    </button>
-                  )}
-                </div>
-              ))}
-          </div>
+      {/* {feeds.map(([feedId, feed]) => (
+        <h2 key={feedId}>Hello</h2>
+      ))} */}
 
-          <form
-            className={style.commentForm}
-            onSubmit={(e) => handleCommentSubmit(e, feedId)}
-          >
-            <input
-              type="text"
-              placeholder="댓글을 입력하세요"
-              value={newComment[feedId] || ""}
-              onChange={(e) =>
-                setNewComment((prev) => ({
-                  ...prev,
-                  [feedId]: e.target.value,
-                }))
-              }
-              className={style.commentInput}
-            />
-            <button type="submit" className={style.commentButton}>
-              댓글 달기
-            </button>
-          </form>
-        </div>
-      ))}
+      {/* {feeds.map(([feedId, feed]) => {
+        // fetchAuthor(feed.authorUid);
+        return (
+          <div key={feedId} className={style.feedContainer}>
+            <div className={style.feedUser}>
+              <img
+                src={feed.profileImg === "" ? default_profile : feed.profileImg}
+                className={style.authorImg}
+              />
+              <div>
+                <div>{feed.nickname || "닉네임 없음"}</div>
+                <div>{userData ? userData.nickname : "닉네임 없음"}</div>
+              </div>
+            </div>
+            <h2>{feed.title}</h2>
+            <p>사용 언어: {feed.language}</p>
+            <p>등록 시간: {new Date(feed.createdAt).toLocaleString()}</p>
+            <p>{feed.content}</p>
+            {feed.imageUrl && (
+              <img
+                src={feed.imageUrl}
+                alt="피드 이미지"
+                className={style.feedImage}
+              />
+            )}
+
+            <div className={style.commentList}>
+              {comments[feedId] &&
+                comments[feedId].map(([commentId, comment]) => (
+                  <div key={commentId} className={style.comment}>
+                    <p>
+                      <strong>{comment.nickname || "닉네임 없음"}</strong>:{" "}
+                      {comment.text}
+                    </p>
+                    <span>{new Date(comment.createdAt).toLocaleString()}</span>
+                    {auth.currentUser?.uid === comment.userId && (
+                      <button
+                        onClick={handleCommentDelete(feedId, commentId)}
+                        className={style.deleteButton}
+                      >
+                        삭제
+                      </button>
+                    )}
+                  </div>
+                ))}
+            </div>
+
+            <form
+              className={style.commentForm}
+              onSubmit={(e) => handleCommentSubmit(e, feedId)}
+            >
+              <input
+                type="text"
+                placeholder="댓글을 입력하세요"
+                value={newComment[feedId] || ""}
+                onChange={(e) => handleCommentChange(e, feedId)}
+                className={style.commentInput}
+              />
+              <button type="submit" className={style.commentButton}>
+                댓글 달기
+              </button>
+            </form>
+          </div>
+        );
+      })} */}
     </div>
   );
 };
