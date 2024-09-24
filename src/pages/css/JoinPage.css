@@ -55,6 +55,7 @@ body {
   /* margin: auto; */
   margin-top: 103px;
   padding: 0 20px;
+  position: relative;
 }
 
 .register-form input {
@@ -94,14 +95,16 @@ body {
   background-color: gray;
 }
 
-p {
+.register-form p {
   margin-top: 15px;
   font-size: 14px;
+  color: #747474;
 }
 
-p a {
-  color: black;
+.register-form p a {
+  color: #747474;
   text-decoration: none;
+  font-weight: bold;
 }
 
 p a:hover {
@@ -119,49 +122,51 @@ p a:hover {
 }
 
 .error {
-  color: #f54040;
+  color: #d60202;
 }
 
 .success {
-  color: #2956f6;
+  color: #747474;
+}
+
+.techStackWrap {
+  position: relative;
 }
 
 .addStack {
   text-align: start;
   padding: 10px;
-  /* margin-bottom: 15px; */
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  /* border: 2px solid #c6d3c9; */
-  /* border-radius: 5px; */
   width: 90%;
   margin: 0 auto 15px auto;
-  /* font-size: 14px; */
   background: url("../../components/img/down_arrow.svg") no-repeat 97% 50%;
-  /* padding: 5px 10px; */
   cursor: pointer;
-  /* margin-left: 80px; */
+  /* position: relative; */
 }
 
 .addStackOpened {
   background: url("../../components/img/up_arrow.svg") no-repeat 97% 50%;
 }
 
-.wrap {
+.techStacks {
   position: absolute;
-  /* border: 1px solid #f54040; */
+  width: 90%;
+  margin: 5%;
+  top: 50%;
+}
+.wrap {
   border: 1px solid #ccc;
-
   border-radius: 5px;
   background-color: white;
   z-index: 1;
-  width: 39%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-left: 26.5px;
-  top: 66.3%;
+  /* margin: 0 auto 15px auto; */
+  margin: auto;
   justify-content: space-between;
   padding: 10px;
 }

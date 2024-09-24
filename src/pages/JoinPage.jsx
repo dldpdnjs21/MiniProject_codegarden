@@ -143,51 +143,31 @@ const JoinPage = () => {
                 <option value="보안 개발자">보안</option>
               </select>
             </div>
-            {/* <div className="select-wrap"> */}
-            {/* <select
-                name="techStack"
-                value={formData.techStack}
-                onChange={handleChange}
-                required
+            <div className="techStackWrap">
+              <div
+                className={`addStack ${stackBoxOpen ? "addStackOpened" : ""}`}
+                onClick={() => {
+                  setStackBoxOpen((prev) => !prev);
+                }}
               >
-                <option value="">기술 스택</option>
-                <option value="React">React</option>
-                <option value="Nodejs">Node.js</option>
-                <option value="Django">Django</option>
-                <option value="C">C</option>
-                <option value="C#">C#</option>
-                <option value="C++">C++</option>
-                <option value="Java">Java</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="Python">Python</option>
-                <option value="Swift">Swift</option>
-                <option value="R">R</option>
-                <option value="SQL">SQL</option>
-              </select> */}
-            {/* </div> */}
-            <div
-              className={`addStack ${stackBoxOpen ? "addStackOpened" : ""}`}
-              onClick={() => {
-                setStackBoxOpen((prev) => !prev);
-              }}
-            >
-              {checkedList.length > 0
-                ? checkedList.map((item, index) => {
-                    if (index === checkedList.length - 1) return item.name;
-                    else return item.name + ", ";
-                  })
-                : "기술스택"}
+                {checkedList.length > 0
+                  ? checkedList.map((item, index) => {
+                      if (index === checkedList.length - 1) return item.name;
+                      else return item.name + ", ";
+                    })
+                  : "기술스택"}
+              </div>
+              {stackBoxOpen && (
+                <div className="techStacks">
+                  <TechStackSelect
+                    handleCheck={handleCheck}
+                    checkedList={checkedList}
+                    wrap="wrap"
+                    checkbox="checkbox"
+                  />
+                </div>
+              )}
             </div>
-            {stackBoxOpen && (
-              // <div className="techStacks">
-              <TechStackSelect
-                handleCheck={handleCheck}
-                checkedList={checkedList}
-                wrap="wrap"
-                checkbox="checkbox"
-              />
-              // </div>
-            )}
             {/* 에러 */}
             {error && !successMessage && (
               <p className="error message" aria-live="assertive">

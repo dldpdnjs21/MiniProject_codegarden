@@ -86,17 +86,19 @@ body {
   background-color: gray;
 }
 
-p {
+.login-form p {
+  color: #747474;
   margin-top: 15px;
   font-size: 14px;
 }
 
-p a {
-  color: black;
+.login-form p a {
+  color: #747474;
   text-decoration: none;
+  font-weight: bold;
 }
 
-p a:hover {
+.login-form p a:hover {
   text-decoration: underline;
 }
 
