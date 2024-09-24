@@ -4,16 +4,37 @@
   width: 764px;
   margin-left: auto;
   background-color: white;
-  padding: 8%;
+  /* padding: 8%; */
   margin-top: 15px;
 }
 
 .feedUser {
+  padding: 5% 8%;
   display: flex;
+  border-radius: 8px 8px 0 0;
+  background-color: #c6d3c9;
+  gap: 10px;
+  align-items: center;
 }
 
+.nickname {
+  /* vertical-align: middle; */
+}
+
+.field {
+}
+.contentsWrap {
+  padding: 5% 8%;
+  /* border-bottom: 1px solid red; */
+  border-bottom: 0.8px solid #e7e6e5;
+}
 .authorImg {
-  width: 30px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #7e8e81;
+  box-shadow: 0 0 0 3px #7e8e81 inset;
+  border-radius: 50%;
+  /* box-sizing: border-box; */
 }
 
 .feedImage {
