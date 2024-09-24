@@ -1,33 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ref as dbRef, get } from "firebase/database";
+import { db } from "../../pages/firebase/firebase";
 import style from "../css/SearchUser.module.css";
 import searchicon from "../img/searchicon.svg";
 import TechStackBadge from "../TechStackBadge";
 import default_profile from "../img/default_profile.svg";
 
 const SearchUser = ({ isOpen, closeModal }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (searchQuery.trim() === "") {
+        setFilteredUsers([]);
+        return;
+      }
+
+      const usersRef = dbRef(db, "users");
+      const snapshot = await get(usersRef);
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const usersArray = Object.values(data);
+
+  
+        const filtered = usersArray.filter((user) =>
+          user.nickname.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredUsers(filtered);
+      } else {
+        setFilteredUsers([]); // 데이터가 없을땐 빈 배열
+      }
+    };
+
+    fetchUsers();
+  }, [searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   if (!isOpen) return null;
 
-  const users = [
-    {
-      profileImg: "",
-      nickname: "먹짱킴",
-      developmentField: "프론트엔드",
-      techStacks: [
-        { name: "React", color: "61DAFB" },
-        { name: "JavaScript", color: "F7DF1E" },
-      ],
-    },
-    {
-      profileImg: "",
-      nickname: "이애옹",
-      developmentField: "풀스택",
-      techStacks: [
-        { name: "React", color: "61DAFB" },
-        { name: "JavaScript", color: "F7DF1E" },
-        { name: "Spring", color: "6DB33F" },
-      ],
-    },
-  ];
   return (
     <div className={style.modal}>
       <div className={style.modalContent}>
@@ -42,38 +56,39 @@ const SearchUser = ({ isOpen, closeModal }) => {
             type="text"
             placeholder="유저를 검색해보세요"
             className={style.searchInput}
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
           <img className={style.searchicon} src={searchicon} alt="검색" />
         </div>
-        {/* <div className={style.techlp;',././Stack}> */}
-        {/* <TechStackBadge name="React" color="61dafb" /> */}
-        {/* </div> */}
+
         <div className={style.userList}>
-          {users.map((user) => {
-            return (
-              <div className={style.userArea}>
+          {filteredUsers.length === 0 && searchQuery !== " " ? (
+            <p className={style.nouser}>코드가든에서 리뷰어를 찾아보세요</p>
+          ) : (
+            filteredUsers.map((user) => (
+              <div key={user.uid} className={style.userArea}>
                 <img
-                  src={`${user.profileImg ? user.profileImg : default_profile}`}
+                  src={user.profileImg || default_profile}
                   alt="profile"
                   className={style.profileImg}
                 />
-                <div>
+                <div className={style.username}>
                   <div className={style.detail}>{user.nickname}</div>
-                  <div className={style.secondLine}>
-                    <div>{user.developmentField} 개발자</div>
-                    <div className={style.techStacks}>
-                      {user.techStacks.map((techStack) => (
-                        <TechStackBadge
-                          name={techStack.name}
-                          color={techStack.color}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                  <div className={style.devtype}>{user.developmentField}</div>
+                </div>
+                <div className={style.techStacks}>
+                  {user.techStacks.map((techStack) => (
+                    <TechStackBadge
+                      key={techStack.name}
+                      name={techStack.name}
+                      color={techStack.color}
+                    />
+                  ))}
                 </div>
               </div>
-            );
-          })}
+            ))
+          )}
         </div>
       </div>
     </div>
