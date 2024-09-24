@@ -83,7 +83,7 @@ select::-ms-expand {
   border-radius: 5px;
   width: 320px;
   font-size: 14px;
-  background: url("../img/down_arrow.svg") no-repeat 95% 50%;
+  background: url("../img/down_arrow.svg") no-repeat 96% 50%;
 }
 
 .addStack {
@@ -91,14 +91,14 @@ select::-ms-expand {
   border-radius: 5px;
   width: 320px;
   font-size: 14px;
-  background: url("../img/down_arrow.svg") no-repeat 95% 50%;
+  background: url("../img/down_arrow.svg") no-repeat 96% 50%;
   padding: 5px 10px;
   cursor: pointer;
   /* margin-left: 80px; */
 }
 
 .addStackOpened {
-  background: url("../img/up_arrow.svg") no-repeat 95% 50%;
+  background: url("../img/up_arrow.svg") no-repeat 96% 50%;
 }
 
 .stackList {
@@ -125,4 +125,26 @@ select::-ms-expand {
   font-size: 14px;
   margin-left: auto;
   color: #7e8e81;
+}
+
+.wrap {
+  /* border-radius: 10px; */
+  /* background-color: #d9d9d9; */
+  position: relative;
+  padding-left: 3px;
+  width: 320px;
+  /* top: -20px; */
+  margin-left: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.checkbox input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 5px; /* 글자와 체크박스 사이의 간격을 변경 */
+  cursor: pointer;
+  width: 85px;
+  line-height: 28px;
 }

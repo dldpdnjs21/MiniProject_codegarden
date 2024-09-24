@@ -15,6 +15,7 @@ const FeedBox = () => {
     if (snapshot.exists()) {
       const data = snapshot.val();
       const feedsArray = Object.entries(data);
+      feedsArray.reverse(); // 피드 조회 순서 최신순으로
       setFeeds(feedsArray);
     }
   };
@@ -111,7 +112,8 @@ const FeedBox = () => {
               comments[feedId].map(([commentId, comment]) => (
                 <div key={commentId} className={style.comment}>
                   <p>
-                    <strong>{comment.nickname || "닉네임 없음"}</strong>: {comment.text}
+                    <strong>{comment.nickname || "닉네임 없음"}</strong>:{" "}
+                    {comment.text}
                   </p>
                   <span>{new Date(comment.createdAt).toLocaleString()}</span>
                   {auth.currentUser?.uid === comment.userId && (
@@ -134,10 +136,12 @@ const FeedBox = () => {
               type="text"
               placeholder="댓글을 입력하세요"
               value={newComment[feedId] || ""}
-              onChange={(e) => setNewComment((prev) => ({
-                ...prev,
-                [feedId]: e.target.value,
-              }))}
+              onChange={(e) =>
+                setNewComment((prev) => ({
+                  ...prev,
+                  [feedId]: e.target.value,
+                }))
+              }
               className={style.commentInput}
             />
             <button type="submit" className={style.commentButton}>

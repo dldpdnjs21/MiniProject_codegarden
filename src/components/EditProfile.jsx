@@ -15,8 +15,8 @@ const EditProfile = () => {
     introduce: "가독성 좋은 코드를 작성하고자 노력하는 프론트엔드 개발자입니다",
   });
 
-  const originData = formData;
-  console.log(originData);
+  // const originData = formData;
+  // console.log(originData);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -54,9 +54,9 @@ const EditProfile = () => {
     setIntroduceCnt(e.target.value.length);
   };
 
-  const handleClickCancel = () => {
-    setFormData(originData);
-  };
+  // const handleClickCancel = () => {
+  //   setFormData(originData);
+  // };
 
   const handleClickEdit = () => {
     console.log(formData);
@@ -85,7 +85,6 @@ const EditProfile = () => {
                 //   value={formData.developmentField}
                 onChange={handleChange}
                 defaultValue={formData.developmentField}
-                className={style.textarea}
                 required
               >
                 <option value="">개발 분야</option>
@@ -111,6 +110,8 @@ const EditProfile = () => {
               <TechStackSelect
                 handleCheck={handleCheck}
                 checkedList={checkedList}
+                wrap={style.wrap}
+                checkbox={style.checkbox}
               />
             )}
             {checkedList.length > 0 ? (

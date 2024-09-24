@@ -11,7 +11,7 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   height: 100vh;
 }
@@ -52,8 +52,10 @@ body {
 .register-form {
   flex: 1;
   width: 50%;
-  margin: auto;
+  /* margin: auto; */
+  margin-top: 103px;
   padding: 0 20px;
+  position: relative;
 }
 
 .register-form input {
@@ -93,14 +95,16 @@ body {
   background-color: gray;
 }
 
-p {
+.register-form p {
   margin-top: 15px;
   font-size: 14px;
+  color: #747474;
 }
 
-p a {
-  color: black;
+.register-form p a {
+  color: #747474;
   text-decoration: none;
+  font-weight: bold;
 }
 
 p a:hover {
@@ -111,4 +115,81 @@ p a:hover {
   width: 90%;
   margin: 0 auto 15px auto;
   background: url("../../components/img/down_arrow.svg") no-repeat 97% 50%;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.error {
+  color: #d60202;
+}
+
+.success {
+  color: #747474;
+}
+
+.techStackWrap {
+  position: relative;
+}
+
+.addStack {
+  text-align: start;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 90%;
+  margin: 0 auto 15px auto;
+  background: url("../../components/img/down_arrow.svg") no-repeat 97% 50%;
+  cursor: pointer;
+  /* position: relative; */
+}
+
+.addStackOpened {
+  background: url("../../components/img/up_arrow.svg") no-repeat 97% 50%;
+}
+
+.techStacks {
+  position: absolute;
+  width: 90%;
+  margin: 5%;
+  top: 50%;
+}
+.wrap {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* margin: 0 auto 15px auto; */
+  margin: auto;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin: 0;
+  /* padding-top: 10px; */
+  width: 10px;
+  vertical-align: middle;
+}
+.checkbox input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 5px;
+  cursor: pointer;
+  width: 60px;
+  font-size: 12px;
+  text-align: start;
+}
+.stackList {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-left: 80px;
+  width: 320px;
 }
