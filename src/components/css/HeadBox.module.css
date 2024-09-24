@@ -39,7 +39,7 @@
 
 .addFeedButton {
   flex: 1;
-  background-color: #9ea28b;
+  background-color: #7e8e81;
   color: white;
   border: none;
   border-radius: 10px;
@@ -52,7 +52,7 @@
 }
 
 .addFeedButton:hover {
-  background-color: #88937c;
+  background-color: #9fafa2;
 }
 .menu {
   background: #fff;
