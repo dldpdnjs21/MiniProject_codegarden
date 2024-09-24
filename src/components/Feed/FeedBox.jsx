@@ -54,96 +54,106 @@ const FeedBox = () => {
 
   return (
     <div>
-      {feeds.map(([feedId, feed], index) => {
-        let author = userInfo[index];
-        // if (!author) {
-        //   console.error("해당 index에 맞는 author가 존재하지 않습니다.");
-        // }
-        if (author) {
-          console.log(author);
-          return (
-            <div key={feedId} className={style.feedContainer}>
-              <div className={style.feedUser}>
-                <img
-                  src={author.profileImg || default_profile}
-                  className={style.authorImg}
-                />
-                <div>
-                  <div className={style.nickname}>
-                    {author.nickname || "닉네임 없음"}
-                  </div>
-                  <div className={style.field}>
-                    {author.developmentField || ""}
-                  </div>
-                </div>
-              </div>
-              <div className={style.contentsWrap}>
-                <div className={style.contentsHead}>
-                  <p className={style.feedDate}>
-                    {/* 등록 시간 */}
-                    {new Date(feed.createdAt)
-                      .toLocaleDateString("ko-KR")
-                      .slice(0, -1)}
-                  </p>
-                  <p className={style.language}>
-                    {/* 사용 언어*/}
-                    {feed.language}
-                  </p>
-                </div>
-                <p className={style.title}>{feed.title}</p>
-
-                <p className={style.content}>{feed.content}</p>
-                {feed.imageUrl && (
+      {feeds.length > 0 ? (
+        feeds.map(([feedId, feed], index) => {
+          let author = userInfo[index];
+          // if (!author) {
+          //   console.error("해당 index에 맞는 author가 존재하지 않습니다.");
+          // }
+          if (author) {
+            console.log(author);
+            return (
+              <div key={feedId} className={style.feedContainer}>
+                <div className={style.feedUser}>
                   <img
-                    src={feed.imageUrl}
-                    alt="피드 이미지"
-                    className={style.feedImage}
+                    src={author.profileImg || default_profile}
+                    className={style.authorImg}
                   />
-                )}
-              </div>
-              <div className={style.commentWrap}>
-                <div className={style.commentList}>
-                  {comments[feedId] &&
-                    comments[feedId].map(([commentId, comment]) => (
-                      <div key={commentId} className={style.comment}>
-                        <p>
-                          <strong>{comment.nickname || "닉네임 없음"}</strong>:{" "}
-                          {comment.text}
-                        </p>
-                        <span>
-                          {new Date(comment.createdAt).toLocaleString()}
-                        </span>
-                        {auth.currentUser?.uid === comment.userId && (
-                          <button
-                            onClick={handleCommentDelete(feedId, commentId)}
-                            className={style.deleteButton}
-                          >
-                            삭제
-                          </button>
-                        )}
-                      </div>
-                    ))}
+                  <div>
+                    <div className={style.nickname}>
+                      {author.nickname || "닉네임 없음"}
+                    </div>
+                    <div className={style.field}>
+                      {author.developmentField || ""}
+                    </div>
+                  </div>
                 </div>
-                <form
-                  className={style.commentForm}
-                  onSubmit={(e) => handleCommentSubmit(e, feedId)}
-                >
-                  <input
-                    type="text"
-                    placeholder="댓글을 입력하세요"
-                    value={newComment[feedId] || ""}
-                    onChange={(e) => handleCommentChange(e, feedId)}
-                    className={style.commentInput}
-                  />
-                  <button type="submit" className={style.commentButton}>
-                    댓글 달기
-                  </button>
-                </form>
+                <div className={style.contentsWrap}>
+                  <div className={style.contentsHead}>
+                    <p className={style.feedDate}>
+                      {/* 등록 시간 */}
+                      {new Date(feed.createdAt)
+                        .toLocaleDateString("ko-KR")
+                        .slice(0, -1)}
+                    </p>
+                    <p className={style.language}>
+                      {/* 사용 언어*/}
+                      {feed.language}
+                    </p>
+                  </div>
+                  <p className={style.title}>{feed.title}</p>
+
+                  <p className={style.content}>{feed.content}</p>
+                  {feed.imageUrl && (
+                    <img
+                      src={feed.imageUrl}
+                      alt="피드 이미지"
+                      className={style.feedImage}
+                    />
+                  )}
+                </div>
+                <div className={style.commentWrap}>
+                  <div className={style.commentHead}>
+                    리뷰
+                    <span className={style.commentCnt}>
+                      {comments[feedId] && comments[feedId].length}
+                    </span>
+                  </div>
+                  <form
+                    className={style.commentForm}
+                    onSubmit={(e) => handleCommentSubmit(e, feedId)}
+                  >
+                    <input
+                      type="text"
+                      placeholder="댓글을 입력하세요"
+                      value={newComment[feedId] || ""}
+                      onChange={(e) => handleCommentChange(e, feedId)}
+                      className={style.commentInput}
+                    />
+                    <button type="submit" className={style.commentButton}>
+                      댓글 달기
+                    </button>
+                  </form>
+                  <div className={style.commentList}>
+                    {comments[feedId] &&
+                      comments[feedId].map(([commentId, comment]) => (
+                        <div key={commentId} className={style.comment}>
+                          <p>
+                            <strong>{comment.nickname || "닉네임 없음"}</strong>
+                            : {comment.text}
+                          </p>
+                          <span>
+                            {new Date(comment.createdAt).toLocaleString()}
+                          </span>
+                          {auth.currentUser?.uid === comment.userId && (
+                            <button
+                              onClick={handleCommentDelete(feedId, commentId)}
+                              className={style.deleteButton}
+                            >
+                              삭제
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        }
-      })}
+            );
+          }
+        })
+      ) : (
+        <div className={style.feedContainer}>피드가 없습니다.</div>
+      )}
     </div>
   );
 };

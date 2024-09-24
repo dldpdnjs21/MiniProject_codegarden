@@ -9,32 +9,49 @@
 }
 
 .feedUser {
-  padding: 5% 8%;
+  padding: 3% 5%;
   display: flex;
   border-radius: 8px 8px 0 0;
-  background-color: #c6d3c9;
+  /* background-color: #c6d3c9; */
+  background-color: #dde6e0;
   gap: 10px;
   align-items: center;
-}
-
-.nickname {
-  /* vertical-align: middle; */
-}
-
-.field {
-}
-.contentsWrap {
-  padding: 5% 8%;
-  /* border-bottom: 1px solid red; */
-  border-bottom: 0.8px solid #e7e6e5;
 }
 .authorImg {
   width: 40px;
   height: 40px;
-  border: 1px solid #7e8e81;
+  /* border: 1px solid #7e8e81;
   box-shadow: 0 0 0 3px #7e8e81 inset;
-  border-radius: 50%;
+  border-radius: 50%; */
   /* box-sizing: border-box; */
+}
+.field {
+  font-size: 14px;
+  color: #7e8e81;
+}
+
+.contentsWrap {
+  padding: 5% 8%;
+  border-bottom: 0.8px solid #e7e6e5;
+}
+
+.contentsHead {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.feedDate {
+  color: #a9a3a3;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.content {
+  margin-bottom: 15px;
 }
 
 .feedImage {
@@ -43,4 +60,21 @@
   align-items: center;
   text-align: center;
   width: 100%;
+}
+
+.commentWrap {
+  padding: 3% 8%;
+}
+
+.commentHead {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  margin-bottom: 3%;
+}
+
+.commentCnt {
+  font-size: 14px;
+  font-weight: normal;
 }
