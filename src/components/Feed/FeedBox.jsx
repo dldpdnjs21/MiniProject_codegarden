@@ -130,14 +130,14 @@ const FeedBox = () => {
                     </span>
                   </div>
                   <div className={style.commentWrite}>
-                    <img
+                    {/* <img
                       src={
                         currentUser.profileImg
                           ? currentUser.profileImg
                           : default_profile
                       }
                       className={style.commentProfile}
-                    />
+                    /> */}
                     <form
                       className={style.commentForm}
                       onSubmit={(e) => handleCommentSubmit(e, feedId)}
@@ -158,13 +158,23 @@ const FeedBox = () => {
                     {comments[feedId] &&
                       comments[feedId].map(([commentId, comment]) => (
                         <div key={commentId} className={style.comment}>
-                          <p>
-                            <strong>{comment.nickname || "닉네임 없음"}</strong>
-                            : {comment.text}
-                          </p>
-                          <span>
-                            {new Date(comment.createdAt).toLocaleString()}
-                          </span>
+                          <img
+                            src={comment?.profileImg || default_profile}
+                            alt="리뷰작성자"
+                            className={style.commentProfile}
+                          />
+                          <div>
+                            <p className={style.commentWriter}>
+                              {comment.nickname || "닉네임 없음"}
+                            </p>
+
+                            <p className={style.commentDate}>
+                              {new Date(comment.createdAt)
+                                .toLocaleDateString("ko-KR")
+                                .slice(0, -1)}
+                            </p>
+                            <p className={style.commentText}>{comment.text}</p>
+                          </div>
                           {auth.currentUser?.uid === comment.userId && (
                             <button
                               onClick={handleCommentDelete(feedId, commentId)}
