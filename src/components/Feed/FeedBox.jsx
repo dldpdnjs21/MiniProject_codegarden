@@ -5,6 +5,7 @@ import style from "../css/FeedBox.module.css";
 import { useComments } from "./Comments";
 import default_profile from "../img/default_profile.svg";
 import useUser from "../../hooks/ useUser";
+import emptyImg from "../img/emptyImg.svg";
 
 const FeedBox = () => {
   const [feeds, setFeeds] = useState([]);
@@ -152,7 +153,10 @@ const FeedBox = () => {
           }
         })
       ) : (
-        <div className={style.feedContainer}>피드가 없습니다.</div>
+        <div className={style.emptyFeed}>
+          <img src={emptyImg} className={style.emptyImg} />
+          <p>리뷰할 코드가 없습니다.</p>
+        </div>
       )}
     </div>
   );

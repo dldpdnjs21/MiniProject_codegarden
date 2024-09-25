@@ -13,8 +13,6 @@ const FeedModal = ({ isOpen, closeModal }) => {
   const [language, setLanguage] = useState("");
   const [content, setContent] = useState("");
   const [fileName, setFileName] = useState("");
-  // const [nickname, setNickname] = useState("");
-  // const [profileImg, setProfileImg] = useState("");
   const [uid, setUid] = useState("");
 
   // 작성자 uid 가져오기

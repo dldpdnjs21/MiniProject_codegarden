@@ -8,6 +8,29 @@
   margin-top: 15px;
 }
 
+.emptyFeed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
+  width: 764px;
+  margin-left: auto;
+  background-color: white;
+  padding: 8%;
+  margin-top: 15px;
+  color: #a9a3a3;
+  font-size: 16px;
+  font-weight: bold;
+  gap: 15px;
+}
+
+.emptyImg {
+  width: 25%;
+  opacity: 0.6;
+}
+
 .feedUser {
   padding: 3% 5%;
   display: flex;
@@ -32,13 +55,14 @@
 
 .contentsWrap {
   padding: 5% 8%;
-  border-bottom: 0.8px solid #e7e6e5;
+  border-bottom: 1.5px solid #e7e6e5;
 }
 
 .contentsHead {
   display: flex;
   gap: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
 }
 
 .feedDate {
@@ -46,12 +70,14 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 .content {
   margin-bottom: 15px;
+  font-size: 15px;
+  white-space: pre-wrap;
 }
 
 .feedImage {
