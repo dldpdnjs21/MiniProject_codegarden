@@ -70,7 +70,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
       setFileName("");
       closeModal();
       // 페이지 리로드
-    window.location.reload();
+      window.location.reload();
     } else {
       console.log("모든 필드를 입력하세요.");
     }
@@ -100,9 +100,21 @@ const FeedModal = ({ isOpen, closeModal }) => {
                 사용언어
               </option>
               <option value="javascript">JavaScript</option>
+              <option value="html">HTML</option>
               <option value="python">Python</option>
               <option value="java">Java</option>
               <option value="csharp">C#</option>
+              <option value="php">PHP</option>
+              <option value="cpp">C++</option>
+              <option value="typescript">TypeScript</option>
+              <option value="sql">SQL</option>
+              <option value="ruby">Ruby</option>
+              <option value="swift">Swift</option>
+              <option value="go">Go</option>
+              <option value="kotlin">Kotlin</option>
+              <option value="rust">Rust</option>
+              <option value="dart">Dart</option>
+              <option value="r">R</option>
             </select>
           </div>
           <div>

@@ -86,11 +86,11 @@ body {
   background-color: gray;
 }
 
-.login-form p {
+/* .message {
   color: #747474;
   margin-top: 15px;
   font-size: 14px;
-}
+} */
 
 .login-form p a {
   color: #747474;
@@ -102,6 +102,8 @@ body {
   text-decoration: underline;
 }
 
-.error {
-  margin-top: 0;
+.errorMessage {
+  color: #d60202;
+  margin-bottom: 15px;
+  font-size: 14px;
 }

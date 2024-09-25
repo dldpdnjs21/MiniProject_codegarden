@@ -95,11 +95,11 @@ body {
   background-color: gray;
 }
 
-.register-form p {
+/* .register-form p {
   margin-top: 15px;
   font-size: 14px;
   color: #747474;
-}
+} */
 
 .register-form p a {
   color: #747474;
@@ -118,7 +118,9 @@ p a:hover {
 }
 
 .message {
-  margin-bottom: 15px;
+  margin: 15px 0;
+  font-size: 14px;
+  color: #747474;
 }
 
 .error {

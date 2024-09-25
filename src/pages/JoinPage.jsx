@@ -13,7 +13,7 @@ import TechStackSelect from "../components/dropdown/TechStackSelect";
 const JoinPage = () => {
   const [formData, setFormData] = useState({
     nickname: "",
-    profileImg: "",
+    // profileImg: "",
     id: "",
     password: "",
     developmentField: "",
@@ -67,6 +67,7 @@ const JoinPage = () => {
         developmentField: formData.developmentField,
         techStacks: formData.techStacks,
         introduce: "",
+        profileImg: "",
       });
 
       setSuccessMessage(
@@ -181,7 +182,7 @@ const JoinPage = () => {
               </p>
             )}{" "}
             <button type="submit">회원가입</button>
-            <p>
+            <p className="message">
               계정이 있으신가요?{" "}
               <a onClick={() => navigate("/login")}>로그인</a>
             </p>

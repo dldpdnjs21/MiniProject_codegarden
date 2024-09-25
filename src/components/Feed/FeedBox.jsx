@@ -73,7 +73,7 @@ const FeedBox = () => {
   }, [feeds]);
 
   return (
-    <div>
+    <div style={{ marginBottom: "20px" }}>
       {feeds.length > 0 ? (
         feeds.map(([feedId, feed], index) => {
           let author = userInfo[index];
