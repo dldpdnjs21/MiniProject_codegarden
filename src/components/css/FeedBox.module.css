@@ -90,7 +90,9 @@
 }
 
 .commentWrap {
-  padding: 3% 8%;
+  padding: 5% 8%;
+  /* max-height: 480px;
+  overflow: scroll;*/
 }
 
 .commentHead {
@@ -112,6 +114,7 @@
 
 .commentProfile {
   width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .commentForm {
@@ -138,4 +141,48 @@
   background: none;
   cursor: pointer;
   /* background: url("../img/paper_plane.svg") no-repeat; */
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+  max-height: 320px;
+  overflow: scroll;
+  /* margin: 30px 0 0 0; */
+  margin-top: 40px;
+  /* background-color: #f8f9f9; */
+}
+.comment {
+  display: flex;
+  gap: 20px;
+}
+.comment:not(:last-child) {
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 20px;
+}
+.commentWriter {
+  /* font-weight: bold; */
+  margin-top: 4px;
+}
+.commentDate {
+  color: #a9a3a3;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.commentText {
+  margin-top: 14px;
+  font-size: 15px;
+}
+
+.deleteButton {
+  margin-left: auto;
+  border: none;
+  background: none;
+  font-size: 14px;
+  /* font-weight: bold; */
+  color: #a9a3a3;
+  /* margin-right: 20px; */
+  cursor: pointer;
 }
