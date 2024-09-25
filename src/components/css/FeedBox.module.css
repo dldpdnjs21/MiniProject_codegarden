@@ -43,6 +43,7 @@
 .authorImg {
   width: 40px;
   height: 40px;
+  border-radius: 50%;
   /* border: 1px solid #7e8e81;
   box-shadow: 0 0 0 3px #7e8e81 inset;
   border-radius: 50%; */
@@ -99,8 +100,42 @@
   font-weight: bold;
   margin-bottom: 3%;
 }
-
 .commentCnt {
   font-size: 14px;
   font-weight: normal;
+}
+.commentWrite {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.commentProfile {
+  width: 40px;
+  border-radius: 50%;
+}
+.commentForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #eceeec;
+  height: 35px;
+  width: 100%;
+  padding: 5px 20px;
+}
+.commentInput {
+  border: none;
+  background: none;
+  width: 100%;
+}
+
+.commentForm input:focus {
+  outline: none;
+}
+.commentButton {
+  border: none;
+  background: none;
+  cursor: pointer;
+  /* background: url("../img/paper_plane.svg") no-repeat; */
 }

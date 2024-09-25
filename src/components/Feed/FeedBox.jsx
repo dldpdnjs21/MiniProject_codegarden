@@ -6,6 +6,7 @@ import { useComments } from "./Comments";
 import default_profile from "../img/default_profile.svg";
 import useUser from "../../hooks/ useUser";
 import emptyImg from "../img/emptyImg.svg";
+import paper_plane from "../img/paper_plane.svg";
 
 const FeedBox = () => {
   const [feeds, setFeeds] = useState([]);
@@ -17,6 +18,8 @@ const FeedBox = () => {
     handleCommentDelete,
     newComment,
   } = useComments();
+
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     // 피드 가져오기
@@ -35,6 +38,22 @@ const FeedBox = () => {
     };
 
     fetchFeeds();
+
+    // 현재유저 가져오기
+    const fetchUser = async () => {
+      const user = auth.currentUser;
+
+      if (!user) return;
+
+      const userRef = dbRef(db, `users/${user.uid}`);
+      const userSnapshot = await get(userRef);
+      const userData = userSnapshot.val();
+      setCurrentUser(userData);
+      console.log(userData);
+      if (!userData) return;
+    };
+
+    fetchUser();
   }, []);
 
   useEffect(() => {
@@ -110,21 +129,31 @@ const FeedBox = () => {
                       {comments[feedId] && comments[feedId].length}
                     </span>
                   </div>
-                  <form
-                    className={style.commentForm}
-                    onSubmit={(e) => handleCommentSubmit(e, feedId)}
-                  >
-                    <input
-                      type="text"
-                      placeholder="댓글을 입력하세요"
-                      value={newComment[feedId] || ""}
-                      onChange={(e) => handleCommentChange(e, feedId)}
-                      className={style.commentInput}
+                  <div className={style.commentWrite}>
+                    <img
+                      src={
+                        currentUser.profileImg
+                          ? currentUser.profileImg
+                          : default_profile
+                      }
+                      className={style.commentProfile}
                     />
-                    <button type="submit" className={style.commentButton}>
-                      댓글 달기
-                    </button>
-                  </form>
+                    <form
+                      className={style.commentForm}
+                      onSubmit={(e) => handleCommentSubmit(e, feedId)}
+                    >
+                      <input
+                        type="text"
+                        placeholder="리뷰를 작성해 주세요."
+                        value={newComment[feedId] || ""}
+                        onChange={(e) => handleCommentChange(e, feedId)}
+                        className={style.commentInput}
+                      />
+                      <button type="submit" className={style.commentButton}>
+                        <img src={paper_plane} />
+                      </button>
+                    </form>
+                  </div>
                   <div className={style.commentList}>
                     {comments[feedId] &&
                       comments[feedId].map(([commentId, comment]) => (
