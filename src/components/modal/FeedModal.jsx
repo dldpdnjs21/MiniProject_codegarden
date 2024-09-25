@@ -13,21 +13,25 @@ const FeedModal = ({ isOpen, closeModal }) => {
   const [language, setLanguage] = useState("");
   const [content, setContent] = useState("");
   const [fileName, setFileName] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [uid, setUid] = useState("");
 
+  // 작성자 uid 가져오기
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const userRef = dbRef(db, "users/" + user.uid);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
-          setNickname(userData.nickname || "Anonymous");
-        } else {
-          console.log("사용자 데이터가 존재하지 않습니다.");
-        }
-      }
+      if (!user) return;
+      setUid(user.uid);
+      console.log(user.uid);
+      // if (user) {
+      //   const userRef = dbRef(db, "users/" + user.uid);
+      //   const snapshot = await get(userRef);
+      //   if (snapshot.exists()) {
+      //     const userData = snapshot.val();
+      //     setNickname(userData.nickname || "Anonymous");
+      //   } else {
+      //     console.log("사용자 데이터가 존재하지 않습니다.");
+      //   }
+      // }
     });
   }, []);
 
@@ -46,7 +50,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
       const url = await getDownloadURL(storageRef);
       setImageURL(url);
 
-      // 제목, 사용 언어, 피드 내용, 이미지 URL, 닉네임을 Database에 저장
+      // 제목, 사용 언어, 피드 내용, 이미지 URL, 작성자 uid를 Database에 저장
       const feedRef = dbRef(db, `feeds/${Date.now()}`);
       const createdAt = new Date().toISOString();
       await set(feedRef, {
@@ -55,7 +59,8 @@ const FeedModal = ({ isOpen, closeModal }) => {
         content: content,
         imageUrl: url,
         createdAt: createdAt,
-        nickname: nickname,
+        // nickname: nickname,
+        authorUid: uid,
       });
 
       setTitle("");

@@ -11,7 +11,7 @@ const TechStackSelect = ({ handleCheck, checkedList, wrap, checkbox }) => {
     { name: "PHP", color: "777BB4" },
     { name: "Python", color: "3776AB" },
     { name: "Node.js", color: "339933" },
-    { name: "C#", color: "239120" },
+    { name: "C++", color: "00599C" },
     { name: "Swift", color: "FA7343" },
     { name: "Kotlin", color: "7F52FF" },
     { name: "GitHub", color: "181717" },

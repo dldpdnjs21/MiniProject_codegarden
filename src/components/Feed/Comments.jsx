@@ -30,15 +30,52 @@ export const useComments = () => {
     });
   };
 
+  // const handleCommentSubmit = async (e, feedId) => {
+  //   e.preventDefault();
+  //   const commentText = newComment[feedId];
+
+  //   const user = auth.currentUser;
+
+  //   const userRef = dbRef(db, `users/${user.uid}`);
+  //   const userSnapshot = await get(userRef);
+  //   const userData = userSnapshot.val();
+
+  //   if (commentText) {
+  //     const commentsRef = dbRef(db, `feeds/${feedId}/comments`);
+  //     const newCommentRef = push(commentsRef);
+  //     await set(newCommentRef, {
+  //       text: commentText,
+  //       createdAt: new Date().toISOString(),
+  //       nickname: userData.nickname,
+  //       userId: user.uid,
+  //     });
+
+  //     setNewComment({
+  //       ...newComment,
+  //       [feedId]: "",
+  //     });
+
+  //     fetchComments(feedId);
+  //   }
+  // };
+
+  // const handleCommentDelete = async (feedId, commentId) => {
+  //   const commentRef = dbRef(db, `feeds/${feedId}/comments/${commentId}`);
+  //   await remove(commentRef);
+  //   fetchComments(feedId);
+  // };
+
   const handleCommentSubmit = async (e, feedId) => {
     e.preventDefault();
     const commentText = newComment[feedId];
-
     const user = auth.currentUser;
+
+    if (!user) return;
 
     const userRef = dbRef(db, `users/${user.uid}`);
     const userSnapshot = await get(userRef);
     const userData = userSnapshot.val();
+    if (!userData) return;
 
     if (commentText) {
       const commentsRef = dbRef(db, `feeds/${feedId}/comments`);
@@ -47,23 +84,34 @@ export const useComments = () => {
         text: commentText,
         createdAt: new Date().toISOString(),
         nickname: userData.nickname,
+        profileImg: userData.profileImg,
         userId: user.uid,
       });
 
-      setNewComment({
-        ...newComment,
+      setNewComment((prev) => ({
+        ...prev,
         [feedId]: "",
-      });
+      }));
 
       fetchComments(feedId);
     }
   };
 
-  const handleCommentDelete = async (feedId, commentId) => {
+  const handleCommentDelete = (feedId, commentId) => async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
     const commentRef = dbRef(db, `feeds/${feedId}/comments/${commentId}`);
     await remove(commentRef);
     fetchComments(feedId);
   };
 
-  return { comments, fetchComments, handleCommentSubmit, handleCommentChange, handleCommentDelete, newComment };
+  return {
+    comments,
+    fetchComments,
+    handleCommentSubmit,
+    handleCommentChange,
+    handleCommentDelete,
+    newComment,
+  };
 };
