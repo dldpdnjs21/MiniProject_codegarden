@@ -69,6 +69,8 @@ const FeedModal = ({ isOpen, closeModal }) => {
       setFile(null);
       setFileName("");
       closeModal();
+      // 페이지 리로드
+    window.location.reload();
     } else {
       console.log("모든 필드를 입력하세요.");
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ref as dbRef, get, push, set, remove } from "firebase/database";
+import { ref as dbRef, get } from "firebase/database";
 import { auth, db } from "../../pages/firebase/firebase";
 import style from "../css/FeedBox.module.css";
 import { useComments } from "./Comments";

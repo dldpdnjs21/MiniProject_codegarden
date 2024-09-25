@@ -23,13 +23,18 @@ const SearchUser = ({ isOpen, closeModal }) => {
         const data = snapshot.val();
         const usersArray = Object.values(data);
 
-  
-        const filtered = usersArray.filter((user) =>
-          user.nickname.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+        const filtered = usersArray.filter((user) => {
+          const nickname = user.nickname ? user.nickname.toLowerCase() : "";
+          const devField = user.developmentField ? user.developmentField.toLowerCase() : "";
+        
+          const nicknameMatch = nickname.includes(searchQuery.toLowerCase());
+          const devFieldMatch = devField.includes(searchQuery.toLowerCase());
+        
+          return nicknameMatch || devFieldMatch;
+        });
         setFilteredUsers(filtered);
       } else {
-        setFilteredUsers([]); // 데이터가 없을땐 빈 배열
+        setFilteredUsers([]); // 데이터가 없을 때는 빈 배열
       }
     };
 
@@ -63,7 +68,7 @@ const SearchUser = ({ isOpen, closeModal }) => {
         </div>
 
         <div className={style.userList}>
-          {filteredUsers.length === 0 && searchQuery !== " " ? (
+          {filteredUsers.length === 0 && searchQuery.trim() !== " " ? (
             <p className={style.nouser}>코드가든에서 리뷰어를 찾아보세요</p>
           ) : (
             filteredUsers.map((user) => (
