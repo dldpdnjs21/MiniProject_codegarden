@@ -77,7 +77,7 @@ const FeedBox = () => {
     <div style={{ marginBottom: "20px" }}>
       {feeds.length > 0 ? (
         feeds.map(([feedId, feed], index) => {
-          let author = userInfo[index];
+          const author = userInfo[index];
           // if (!author) {
           //   console.error("해당 index에 맞는 author가 존재하지 않습니다.");
           // }
@@ -134,7 +134,14 @@ const FeedBox = () => {
                   <div className={style.commentWrite}>
                     <form
                       className={style.commentForm}
-                      onSubmit={(e) => handleCommentSubmit(e, feedId)}
+                      onSubmit={(e) =>
+                        handleCommentSubmit(
+                          e,
+                          feedId,
+                          feed.authorUid,
+                          feed.title
+                        )
+                      }
                     >
                       <input
                         type="text"
