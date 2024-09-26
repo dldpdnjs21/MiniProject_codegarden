@@ -25,11 +25,13 @@ const SearchUser = ({ isOpen, closeModal }) => {
 
         const filtered = usersArray.filter((user) => {
           const nickname = user.nickname ? user.nickname.toLowerCase() : "";
-          const devField = user.developmentField ? user.developmentField.toLowerCase() : "";
-        
+          const devField = user.developmentField
+            ? user.developmentField.toLowerCase()
+            : "";
+
           const nicknameMatch = nickname.includes(searchQuery.toLowerCase());
           const devFieldMatch = devField.includes(searchQuery.toLowerCase());
-        
+
           return nicknameMatch || devFieldMatch;
         });
         setFilteredUsers(filtered);

@@ -8,9 +8,29 @@ import useUser from "../../hooks/ useUser";
 import emptyImg from "../img/emptyImg.svg";
 import paper_plane from "../img/paper_plane.svg";
 import LanguageBadge from "../LanguageBadge";
+import searchicon from "../img/searchicon.svg";
+import FeedModal from "../modal/FeedModal";
 
 const FeedBox = () => {
+  // 피드 작성 모달 state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // 피드 검색
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredFeeds, setFilteredFeeds] = useState([]); // 필터링된 피드
+  const [notice, setNotice] = useState("리뷰할 코드가 없습니다."); // 안내문
+
   const [feeds, setFeeds] = useState([]);
+  const [authorInfo, setAuthorInfo] = useState({}); // 피드 작성자 정보
+
   const {
     comments,
     fetchComments,
@@ -35,49 +55,112 @@ const FeedBox = () => {
 
         feedsArray.reverse(); // 피드 조회 순서 최신순으로
         setFeeds(feedsArray);
+        setFilteredFeeds(feedsArray); // 처음에는 전체 피드를 표시
       }
     };
 
     fetchFeeds();
 
     // 현재유저 가져오기
-    const fetchUser = async () => {
-      const user = auth.currentUser;
+    // const fetchUser = async () => {
+    //   const user = auth.currentUser;
 
-      if (!user) return;
+    //   if (!user) return;
 
-      const userRef = dbRef(db, `users/${user.uid}`);
-      const userSnapshot = await get(userRef);
-      const userData = userSnapshot.val();
-      setCurrentUser(userData);
-      console.log(userData);
-      if (!userData) return;
-    };
+    //   const userRef = dbRef(db, `users/${user.uid}`);
+    //   const userSnapshot = await get(userRef);
+    //   const userData = userSnapshot.val();
+    //   setCurrentUser(userData);
+    //   console.log(userData);
+    //   if (!userData) return;
+    // };
 
-    fetchUser();
+    // fetchUser();
   }, []);
 
-  useEffect(() => {
-    feeds.forEach(([feedId]) => {
-      fetchComments(feedId);
+  // 피드 필터링 함수 (검색어를 기준으로)
+  const filterFeeds = () => {
+    const query = searchQuery.toLowerCase();
+    const filtered = feeds.filter(([feedId, feed]) => {
+      return (
+        feed.title.toLowerCase().includes(query) ||
+        feed.language.toLowerCase().includes(query) ||
+        authorInfo[feed.authorUid].nickname.toLowerCase().includes(query)
+      );
     });
-  }, [feeds]);
+    if (filtered.length === 0) {
+      setNotice("검색 결과가 없습니다.");
+    }
+    setFilteredFeeds(filtered); // 필터링된 결과를 저장
+  };
 
-  const { userInfo, fetchUserInfo } = useUser(); // 피드 작성자 정보 가져오기
+  // 검색창에서 엔터를 눌렀을 때 필터링 수행
+  const handleSearchKeyDown = (e) => {
+    if (e.key === "Enter") {
+      // if (searchQuery.length < 2) {
+      //   setNotice("검색어를 두 글자 이상 입력해주세요.");
+      // } else filterFeeds(); // 엔터를 눌렀을 때 필터링 실행
+      filterFeeds(); // 엔터를 눌렀을 때 필터링 실행
+    }
+  };
 
+  // 피드 댓글 가져오기
   useEffect(() => {
     if (feeds.length) {
-      feeds.forEach((element) => {
-        fetchUserInfo(element[1].authorUid);
+      feeds.forEach(([feedId]) => {
+        fetchComments(feedId);
       });
     }
   }, [feeds]);
 
+  // const { userInfo, fetchUserInfo } = useUser();
+
+  // 피드 작성자 정보 가져오기
+  const fetchAuthorInfo = async (uid) => {
+    const userRef = dbRef(db, `users/${uid}`);
+    const userSnapshot = await get(userRef);
+    const userData = userSnapshot.val();
+    setAuthorInfo((prev) => ({ ...prev, [uid]: userData })); // UID를 키로 저장
+  };
+
+  useEffect(() => {
+    if (feeds.length) {
+      feeds.forEach((feed) => {
+        fetchAuthorInfo(feed[1].authorUid);
+      });
+    }
+  }, [feeds]);
+
+  const handleQueryChange = (e) => {
+    const query = e.target.value.trim();
+    if (query === "") {
+      setFilteredFeeds(feeds);
+    }
+    setSearchQuery(query);
+  };
   return (
     <div style={{ marginBottom: "20px" }}>
-      {feeds.length > 0 ? (
-        feeds.map(([feedId, feed], index) => {
-          const author = userInfo[index];
+      <div className={style.headContainer}>
+        <input
+          type="text"
+          placeholder="검색어를 입력해주세요."
+          className={style.searchInput}
+          value={searchQuery}
+          // onChange={(e) => setSearchQuery(e.target.value)} // 검색어 상태 업데이트
+          onChange={handleQueryChange} // 검색어 상태 업데이트
+          onKeyDown={handleSearchKeyDown} // 엔터 키를 눌렀을 때 필터링
+          disabled={feeds.length > 0 ? false : true} // 피드가 없으면 disabled
+        />
+        <img className={style.searchicon} src={searchicon} alt="검색" />
+        <button className={style.addFeedButton} onClick={openModal}>
+          피드작성
+        </button>
+
+        <FeedModal isOpen={isModalOpen} closeModal={closeModal} />
+      </div>
+      {filteredFeeds.length > 0 ? (
+        filteredFeeds.map(([feedId, feed]) => {
+          const author = authorInfo[feed.authorUid];
           // if (!author) {
           //   console.error("해당 index에 맞는 author가 존재하지 않습니다.");
           // }
@@ -195,7 +278,7 @@ const FeedBox = () => {
       ) : (
         <div className={style.emptyFeed}>
           <img src={emptyImg} className={style.emptyImg} />
-          <p>리뷰할 코드가 없습니다.</p>
+          <p>{notice}</p>
         </div>
       )}
     </div>
