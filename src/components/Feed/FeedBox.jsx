@@ -7,6 +7,7 @@ import default_profile from "../img/default_profile.svg";
 import useUser from "../../hooks/ useUser";
 import emptyImg from "../img/emptyImg.svg";
 import paper_plane from "../img/paper_plane.svg";
+import LanguageBadge from "../LanguageBadge";
 
 const FeedBox = () => {
   const [feeds, setFeeds] = useState([]);
@@ -106,10 +107,11 @@ const FeedBox = () => {
                         .toLocaleDateString("ko-KR")
                         .slice(0, -1)}
                     </p>
-                    <p className={style.language}>
-                      {/* 사용 언어*/}
+                    {/* 사용 언어*/}
+                    {/* <p className={style.language}>
                       {feed.language}
-                    </p>
+                    </p> */}
+                    <LanguageBadge language={feed.language} />
                   </div>
                   <p className={style.title}>{feed.title}</p>
 
@@ -130,14 +132,6 @@ const FeedBox = () => {
                     </span>
                   </div>
                   <div className={style.commentWrite}>
-                    {/* <img
-                      src={
-                        currentUser.profileImg
-                          ? currentUser.profileImg
-                          : default_profile
-                      }
-                      className={style.commentProfile}
-                    /> */}
                     <form
                       className={style.commentForm}
                       onSubmit={(e) => handleCommentSubmit(e, feedId)}
