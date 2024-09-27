@@ -1,10 +1,13 @@
-  h1 {
+.container{
+    padding: 50px 0;
+}
+h1 {
     font-size: 24px;
     margin-bottom: 20px;
   }
   
   .feedList {
-    margin-top: 8%;
+    /* margin-top: 8%; */
     list-style: none;
     padding: 0;
   }
@@ -14,7 +17,7 @@
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
     transition: transform 0.2s;
   }
   
@@ -25,28 +28,76 @@
   .feedTitle {
     font-size: 18px;
     font-weight: bold;
+    color: black;
   }
-  
+  .feedInfo{
+    display: flex;
+    flex: 1;
+    column-gap: 20px;
+    align-items: center;
+  }
   .feedDate {
     font-size: 14px;
-    color: #6c757d;
+    color: #a9a3a3; /* 날짜 색상 조정 */
   }
   
   .noFeed {
     color: #6c757d;
     font-style: italic;
   }
+  
   .feedDetails {
-    padding: 10px;
+    padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    margin-top: 5px;
+    margin-top: 15px;
+  }
+
+  .feedContent {
+    padding-bottom: 20px;
+  }
+  
+  .feedComment{
+    padding: 20px 0;
+  }
+
+  .reviewCountTitle{
+    padding-right: 10px;
+  }
+
+  .reviewComments{
+    padding-top: 20px;
+  }
+
+  .feedActions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
   }
   
   .deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px; /* 버튼의 모서리 둥글게 */
+  }
+  
+  .deleteButton:hover {
+    background-color: darkred; /* 마우스 오버 시 색상 변경 */
+  }
+  
+  .reviewButton {
     background-color: #7e8e81;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    border-radius: 5px; /* 버튼의 모서리 둥글게 */
   }
+  
+  .reviewButton:hover {
+    background-color: #9fafa2; /* 마우스 오버 시 색상 변경 */
+  }
+  
