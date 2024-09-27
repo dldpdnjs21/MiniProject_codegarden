@@ -22,16 +22,6 @@ const FeedModal = ({ isOpen, closeModal }) => {
       if (!user) return;
       setUid(user.uid);
       console.log(user.uid);
-      // if (user) {
-      //   const userRef = dbRef(db, "users/" + user.uid);
-      //   const snapshot = await get(userRef);
-      //   if (snapshot.exists()) {
-      //     const userData = snapshot.val();
-      //     setNickname(userData.nickname || "Anonymous");
-      //   } else {
-      //     console.log("사용자 데이터가 존재하지 않습니다.");
-      //   }
-      // }
     });
   }, []);
 
@@ -70,7 +60,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
       setFileName("");
       closeModal();
       // 페이지 리로드
-    window.location.reload();
+      window.location.reload();
     } else {
       console.log("모든 필드를 입력하세요.");
     }
@@ -99,10 +89,22 @@ const FeedModal = ({ isOpen, closeModal }) => {
               <option value="" disabled>
                 사용언어
               </option>
-              <option value="javascript">JavaScript</option>
-              <option value="python">Python</option>
-              <option value="java">Java</option>
-              <option value="csharp">C#</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="HTML">HTML</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="C#">C#</option>
+              <option value="PHP">PHP</option>
+              <option value="C++">C++</option>
+              <option value="TypeScript">TypeScript</option>
+              <option value="SQL">SQL</option>
+              <option value="Ruby">Ruby</option>
+              <option value="Swift">Swift</option>
+              <option value="Go">Go</option>
+              <option value="Kotlin">Kotlin</option>
+              <option value="Rust">Rust</option>
+              <option value="Dart">Dart</option>
+              <option value="R">R</option>
             </select>
           </div>
           <div>

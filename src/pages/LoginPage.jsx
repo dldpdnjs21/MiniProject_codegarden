@@ -96,13 +96,13 @@ const LoginPage = () => {
           />
           {/* 로그인 실패 메시지 */}
           {error && (
-            <p className="error message" aria-live="assertive">
+            <p className="errorMessage" aria-live="assertive">
               {error}
             </p>
           )}
           <button type="submit">로그인</button>
 
-          <p>
+          <p className="message">
             계정이 없으신가요? <a onClick={() => navigate("/join")}>회원가입</a>
           </p>
         </form>

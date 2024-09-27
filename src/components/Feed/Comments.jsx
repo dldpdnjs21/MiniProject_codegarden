@@ -65,7 +65,7 @@ export const useComments = () => {
   //   fetchComments(feedId);
   // };
 
-  const handleCommentSubmit = async (e, feedId) => {
+  const handleCommentSubmit = async (e, feedId, authorId, title) => {
     e.preventDefault();
     const commentText = newComment[feedId];
     const user = auth.currentUser;
@@ -86,6 +86,14 @@ export const useComments = () => {
         nickname: userData.nickname,
         profileImg: userData.profileImg,
         userId: user.uid,
+      });
+
+      // 피드 작성자에게 리뷰 도착 알림 보내기
+      const notificationRef = dbRef(db, `notifications/${authorId}/feedReview`);
+      const newNotificationRef = push(notificationRef);
+      await set(newNotificationRef, {
+        contents: `'${title}' 글에 리뷰가 도착했습니다`,
+        feedId: feedId,
       });
 
       setNewComment((prev) => ({
