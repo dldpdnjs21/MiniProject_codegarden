@@ -139,7 +139,7 @@ const FeedBox = () => {
     setSearchQuery(query);
   };
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div style={{ marginBottom: "40px" }}>
       <div className={style.headContainer}>
         <input
           type="text"
