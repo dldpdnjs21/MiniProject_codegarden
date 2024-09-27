@@ -44,22 +44,16 @@
   font-size: 16px;
   cursor: pointer;
 }
-
+.btn:hover {
+  background-color: #9fafa2;
+}
 .mypage {
   background-color: #7e8e81;
   color: white;
   margin-top: 10px;
 }
 
-.mypage:hover {
-  background-color: #9fafa2;
-}
-
 .logout {
   background-color: #c6d3c9;
   color: white;
-}
-
-.logout:hover {
-  background-color: #9fafa2;
 }
