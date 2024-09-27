@@ -1,0 +1,52 @@
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .feedList {
+    margin-top: 8%;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .feedItem {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .feedItem:hover {
+    transform: scale(1.02);
+  }
+  
+  .feedTitle {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .feedDate {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .noFeed {
+    color: #6c757d;
+    font-style: italic;
+  }
+  .feedDetails {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+  }
+  
+  .deleteButton {
+    background-color: #7e8e81;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }

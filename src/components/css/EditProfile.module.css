@@ -4,6 +4,7 @@
   margin-top: 40px;
   align-items: center;
 }
+
 .profileImg {
   width: 200px;
   cursor: pointer;
@@ -109,18 +110,6 @@ select::-ms-expand {
   width: 320px;
 }
 
-.editBtn {
-  border: none;
-  padding: 6px;
-  width: 50px;
-  font-size: 12px;
-  border-radius: 5px;
-  background-color: #7e8e81;
-  color: white;
-  margin-left: auto;
-  font-weight: bold;
-}
-
 .count {
   font-size: 14px;
   margin-left: auto;
@@ -148,3 +137,29 @@ select::-ms-expand {
   width: 85px;
   line-height: 28px;
 }
+
+.successMessage {
+  color: green;
+  width: 200px;
+  margin-top: 10px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.editBtn {
+  border: none;
+  padding: 6px;
+  width: 50px;
+  font-size: 12px;
+  border-radius: 5px;
+  background-color: #7e8e81;
+  color: white;
+  margin-left: auto;
+  font-weight: bold;
+  flex: 1;
+}
+
+.editBtn:hover{
+  background-color: #a1b7a5;
+}
+

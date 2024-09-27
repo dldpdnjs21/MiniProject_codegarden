@@ -1,22 +1,48 @@
 import profileImg from "./img/default_profile.svg";
 import style from "./css/EditProfile.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TechStackSelect from "./dropdown/TechStackSelect";
 import TechStackBadge from "./TechStackBadge";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, get, update } from "firebase/database";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({
-    nickname: "코드가든",
-    developmentField: "frontend",
-    techStacks: [
-      { name: "React", color: "61DAFB" },
-      { name: "JavaScript", color: "F7DF1E" },
-    ],
-    introduce: "가독성 좋은 코드를 작성하고자 노력하는 프론트엔드 개발자입니다",
+    nickname: "",
+    developmentField: "",
+    techStacks: [],
+    introduce: "",
   });
 
-  // const originData = formData;
-  // console.log(originData);
+  const [checkedList, setCheckedList] = useState([]);
+  const [stackBoxOpen, setStackBoxOpen] = useState(false);
+  const [introduceCnt, setIntroduceCnt] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, `users/${user.uid}`);
+      get(userRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          setFormData({
+            nickname: userData.nickname,
+            developmentField: userData.developmentField || "",
+            techStacks: userData.techStacks || [],
+            introduce: userData.introduce || "",
+          });
+          setCheckedList(userData.techStacks || []);
+          setIntroduceCnt(userData.introduce ? userData.introduce.length : 0);
+        }
+      });
+    }
+  }, []);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,12 +50,10 @@ const EditProfile = () => {
     });
   };
 
-  const [checkedList, setCheckedList] = useState(formData.techStacks);
   const handleCheck = (isChecked, item) => {
     let techStackList = formData.techStacks;
     if (isChecked) {
       techStackList = [...techStackList, item];
-      console.log(techStackList);
       setCheckedList(techStackList);
     } else {
       techStackList = techStackList.filter((t) => t.name !== item.name);
@@ -41,26 +65,36 @@ const EditProfile = () => {
     });
   };
 
-  const [stackBoxOpen, setStackBoxOpen] = useState(false);
-
-  console.log(`introduce : ${formData.introduce.length}자`);
-  const [introduceCnt, setIntroduceCnt] = useState(formData.introduce.length);
-
   const handleIntroduceChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      introduce: e.target.value,
     });
     setIntroduceCnt(e.target.value.length);
   };
 
-  // const handleClickCancel = () => {
-  //   setFormData(originData);
-  // };
-
   const handleClickEdit = () => {
-    console.log(formData);
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, `users/${user.uid}`);
+
+      update(userRef, {
+        developmentField: formData.developmentField,
+        techStacks: formData.techStacks,
+        introduce: formData.introduce,
+      }).then(() => {
+        console.log("프로필 수정 완료");
+        alert("프로필 수정이 완료되었습니다");
+        navigate('/main');
+      }).catch(() => {
+        console.log("프로필 수정 실패");
+      });
+    }
   };
+
   return (
     <div className={style.container}>
       <img src={profileImg} className={style.profileImg} />
@@ -72,7 +106,6 @@ const EditProfile = () => {
               type="text"
               name="nickname"
               value={formData.nickname}
-              onChange={handleChange}
               className={style.inputBox}
               readOnly
             />
@@ -82,15 +115,24 @@ const EditProfile = () => {
             <div className={style.selectBox}>
               <select
                 name="developmentField"
-                //   value={formData.developmentField}
                 onChange={handleChange}
-                defaultValue={formData.developmentField}
+                value={formData.developmentField}
                 required
               >
-                <option value="">개발 분야</option>
-                <option value="frontend">프론트엔드</option>
-                <option value="backend">백엔드</option>
-                <option value="fullstack">풀스택</option>
+                {/* 원래 데이터 */}
+                <option value={formData.developmentField}>
+                  {formData.developmentField}
+                </option>
+
+                <option value="프론트엔드 개발자">프론트엔드</option>
+                <option value="백엔드 개발자">백엔드</option>
+                <option value="풀스택 개발자">풀스택</option>
+                <option value="웹 개발자">웹</option>
+                <option value="모바일 개발자">모바일</option>
+                <option value="게임 개발자">게임</option>
+                <option value="DB 개발자">DB</option>
+                <option value="임베디드SW 개발자">임베디드SW</option>
+                <option value="보안 개발자">보안</option>
               </select>
             </div>
           </div>
@@ -117,7 +159,7 @@ const EditProfile = () => {
             {checkedList.length > 0 ? (
               <div className={style.stackList}>
                 {checkedList.map((item) => (
-                  <TechStackBadge name={item.name} color={item.color} />
+                  <TechStackBadge key={item.name} name={item.name} color={item.color} />
                 ))}
               </div>
             ) : (
@@ -128,7 +170,6 @@ const EditProfile = () => {
             <div className={style.label}>내 소개</div>
             <textarea
               value={formData.introduce}
-              // onChange={handleChange}
               onChange={handleIntroduceChange}
               className={style.textBox}
               maxLength="50"
@@ -144,9 +185,8 @@ const EditProfile = () => {
           </button>
         </div>
       </div>
-
-      {/* <button onClick={handleClickCancel}>취소</button> */}
     </div>
   );
 };
+
 export default EditProfile;

@@ -1,0 +1,50 @@
+.chatlistContainer {
+  /* border: 2px solid black; */
+  border-radius: 8px;
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.chatlistHeader {
+  padding-bottom: 15px;
+  border-bottom: 1.5px solid #D4D4D4;
+}
+
+.chatTitle {
+  font-size: 22px;
+  color: #59705E;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.profileWrap {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #D8D7D6;
+}
+
+.profileImg {
+  width: 55px;
+}
+
+.nickname {
+  font-size: 18.5px;
+  margin-bottom: 5px;
+  color: #5B5B5B;
+}
+
+.chatText {
+  font-size: 15px;
+  color: #5B5B5B;
+}
