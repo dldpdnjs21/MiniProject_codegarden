@@ -1,6 +1,7 @@
 const LanguageBadge = (props) => {
   const languages = {
     JavaScript: "#F7DF1ECC", // JavaScript
+    HTML: "#E34F26",
     Python: "#3776ABCC", // Python
     Java: "#007396CC", // Java
     "C#": "#239120CC", // C#

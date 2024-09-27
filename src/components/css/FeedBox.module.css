@@ -16,7 +16,7 @@
   outline: none;
   font-size: 14px;
   background-color: transparent;
-  padding-left: 20px;
+  padding-left: 10px;
   border-bottom: 2px solid #d4d4d4;
 }
 
@@ -154,11 +154,6 @@
   font-weight: bold;
   margin-bottom: 25px;
 }
-.content {
-  margin-bottom: 15px;
-  font-size: 15px;
-  white-space: pre-wrap;
-}
 
 .feedImage {
   display: flex;
@@ -166,6 +161,7 @@
   align-items: center;
   text-align: center;
   width: 100%;
+  margin-top: 10px;
 }
 
 .commentWrap {
@@ -264,4 +260,20 @@
   color: #a9a3a3;
   /* margin-right: 20px; */
   cursor: pointer;
+}
+
+code {
+  margin-bottom: 10px;
+  padding: 3px 6px;
+  border: none;
+  border-radius: 3px;
+  background-color: #e9ecef;
+  font-size: 15px;
+  font-family: "Hack";
+  /* font-family: "Pretendard", "Malgun Gothic", sans-serif; */
+}
+
+.markdown p {
+  margin-bottom: 10px;
+  white-space: pre-wrap;
 }

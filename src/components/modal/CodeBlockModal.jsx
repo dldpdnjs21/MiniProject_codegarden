@@ -15,33 +15,15 @@ const FeedModal = ({ isOpen, closeModal }) => {
   const [fileName, setFileName] = useState("");
   const [uid, setUid] = useState("");
 
-  // 작성자 uid 가져오기
-  useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) return;
-      setUid(user.uid);
-      console.log(user.uid);
-    });
-  }, []);
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-    setFileName(selectedFile ? selectedFile.name : "");
-  };
-
+  // 코드블럭 삽입시 피드 content에 삽입되도록
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title && language && content) {
-      let url = "";
-      if (file) {
-        const storageRef = ref(storage, `images/${file.name}`);
-        // 이미지를 Storage에 업로드
-        await uploadBytes(storageRef, file);
-        url = await getDownloadURL(storageRef);
-        setImageURL(url);
-      }
+    if (file && title && language && content) {
+      const storageRef = ref(storage, `images/${file.name}`);
+      // 이미지를 Storage에 업로드
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      setImageURL(url);
 
       // 제목, 사용 언어, 피드 내용, 이미지 URL, 작성자 uid를 Database에 저장
       const feedRef = dbRef(db, `feeds/${Date.now()}`);
@@ -112,7 +94,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
           </div>
           <div>
             <textarea
-              placeholder="피드백이 필요한 당신의 코드를 작성해주세요 (마크다운 문법으로 작성해주세요)"
+              placeholder="피드백이 필요한 당신의 코드를 작성해주세요"
               className={style.modalTextarea}
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -132,7 +114,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
                   />
                 </label>
               </button>
-              {/* <button type="button" className={style.modalFileButton}>
+              <button type="button" className={style.modalFileButton}>
                 <label htmlFor="code-block" className={style.iconLabel}>
                   <FaCode className={style.icon} />
                   <input
@@ -141,7 +123,7 @@ const FeedModal = ({ isOpen, closeModal }) => {
                     className={style.fileInput}
                   />
                 </label>
-              </button> */}
+              </button>
               {fileName && (
                 <div className={style.fileInfo}>
                   <span className={style.fileName}>첨부파일 : {fileName}</span>
