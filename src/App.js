@@ -14,6 +14,7 @@ import Main from "./pages/MainPage";
 import Header from "./components/Header";
 import MyPage from "./pages/MyPage";
 import ProfilePage from "./pages/ProfilePage";
+import ChatRoom from "./components/ChatRoom"; // ChatRoom 컴포넌트 임포트
 
 const App = () => {
   const location = useLocation();
@@ -30,7 +31,10 @@ const App = () => {
         <Route path="/join" element={<Join />} />
         <Route path="/main" element={<Main />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile" element={<ProfilePage />} />{" "}
+        {/* 검색 결과 페이지 경로 수정 */}
+        <Route path="/chatroom/:roomId" element={<ChatRoom />} />{" "}
+        {/* 채팅방 경로 추가 */}
       </Routes>
     </div>
   );
