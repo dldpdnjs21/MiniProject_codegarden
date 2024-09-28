@@ -10,6 +10,10 @@ import paper_plane from "../img/paper_plane.svg";
 import LanguageBadge from "../LanguageBadge";
 import searchicon from "../img/searchicon.svg";
 import FeedModal from "../modal/FeedModal";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/a11y-dark.css";
+import { useNavigate } from "react-router-dom";
 
 const FeedBox = () => {
   // 피드 작성 모달 state
@@ -80,12 +84,17 @@ const FeedBox = () => {
 
   // 피드 필터링 함수 (검색어를 기준으로)
   const filterFeeds = () => {
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
+    setSearchQuery(query);
     const filtered = feeds.filter(([feedId, feed]) => {
+      // 검색 조건 : 피드 제목, 사용언어, 작성자 닉네임, 작성자 개발분야
       return (
         feed.title.toLowerCase().includes(query) ||
         feed.language.toLowerCase().includes(query) ||
-        authorInfo[feed.authorUid].nickname.toLowerCase().includes(query)
+        authorInfo[feed.authorUid].nickname.toLowerCase().includes(query) ||
+        authorInfo[feed.authorUid].developmentField
+          .toLowerCase()
+          .includes(query)
       );
     });
     if (filtered.length === 0) {
@@ -132,14 +141,23 @@ const FeedBox = () => {
   }, [feeds]);
 
   const handleQueryChange = (e) => {
-    const query = e.target.value.trim();
-    if (query === "") {
+    const query = e.target.value;
+    if (query.trim() === "") {
       setFilteredFeeds(feeds);
     }
     setSearchQuery(query);
   };
+
+  const navigate = useNavigate();
+
+  const handleClickUser = (uid) => {
+    setSearchQuery("");
+    // profile 페이지로 이동하면서 param값으로 해당 유저 uid 보내기
+    navigate("/profile", { state: { userId: uid } });
+    closeModal();
+  };
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div style={{ marginBottom: "40px" }}>
       <div className={style.headContainer}>
         <input
           type="text"
@@ -168,7 +186,10 @@ const FeedBox = () => {
             console.log(author);
             return (
               <div key={feedId} className={style.feedContainer}>
-                <div className={style.feedUser}>
+                <div
+                  className={style.feedUser}
+                  onClick={() => handleClickUser(feed.authorUid)}
+                >
                   <img
                     src={author.profileImg || default_profile}
                     className={style.authorImg}
@@ -191,14 +212,14 @@ const FeedBox = () => {
                         .slice(0, -1)}
                     </p>
                     {/* 사용 언어*/}
-                    {/* <p className={style.language}>
-                      {feed.language}
-                    </p> */}
                     <LanguageBadge language={feed.language} />
                   </div>
                   <p className={style.title}>{feed.title}</p>
-
-                  <p className={style.content}>{feed.content}</p>
+                  <div className={style.markdown}>
+                    <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                      {feed.content}
+                    </ReactMarkdown>
+                  </div>
                   {feed.imageUrl && (
                     <img
                       src={feed.imageUrl}
@@ -246,9 +267,13 @@ const FeedBox = () => {
                             src={comment?.profileImg || default_profile}
                             alt="리뷰작성자"
                             className={style.commentProfile}
+                            onClick={() => handleClickUser(comment.userId)}
                           />
                           <div>
-                            <p className={style.commentWriter}>
+                            <p
+                              className={style.commentWriter}
+                              onClick={() => handleClickUser(comment.userId)}
+                            >
                               {comment.nickname || "닉네임 없음"}
                             </p>
 

@@ -13,7 +13,7 @@ import Join from "./pages/JoinPage";
 import Main from "./pages/MainPage";
 import Header from "./components/Header";
 import MyPage from "./pages/MyPage";
-import SearchResultPage from "./pages/SearchResultPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   const location = useLocation();
@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/join" element={<Join />} />
         <Route path="/main" element={<Main />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="" element={<SearchResultPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </div>
   );
