@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { ref as dbRef, get } from "firebase/database";
+import { ref as dbRef, get, set } from "firebase/database";
 import { db } from "../../pages/firebase/firebase";
+import { getAuth } from "firebase/auth"; // 추가
+import { useNavigate } from "react-router-dom"; 
 import style from "../css/ReviewRequest.module.css";
 import searchicon from "../img/searchicon.svg";
 import TechStackBadge from "../TechStackBadge";
 import default_profile from "../img/default_profile.svg";
 import paper_plane from "../img/paper_plane.svg";
 
-const SearchUser = ({ isOpen, closeModal }) => {
+const ReviewRequest = ({ isOpen, closeModal }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -17,35 +20,63 @@ const SearchUser = ({ isOpen, closeModal }) => {
         setFilteredUsers([]);
         return;
       }
-
+    
       const usersRef = dbRef(db, "users");
       const snapshot = await get(usersRef);
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const usersArray = Object.values(data);
-
+        
+        const usersArray = Object.entries(data).map(([uid, user]) => ({
+          uid,
+          ...user
+        }));
+    
         const filtered = usersArray.filter((user) => {
           const nickname = user.nickname ? user.nickname.toLowerCase() : "";
           const devField = user.developmentField
             ? user.developmentField.toLowerCase()
             : "";
-
-          const nicknameMatch = nickname.includes(searchQuery.toLowerCase());
-          const devFieldMatch = devField.includes(searchQuery.toLowerCase());
-
-          return nicknameMatch || devFieldMatch;
+    
+          return nickname.includes(searchQuery.toLowerCase()) || devField.includes(searchQuery.toLowerCase());
         });
         setFilteredUsers(filtered);
       } else {
-        setFilteredUsers([]); // 데이터가 없을 때는 빈 배열
+        setFilteredUsers([]);
       }
     };
-
     fetchUsers();
   }, [searchQuery]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
+  };
+
+  const handleRequestClick = async (uid) => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) return;
+
+    const roomId = currentUser.uid > uid ? `${currentUser.uid}_${uid}` : `${uid}_${currentUser.uid}`;
+    const chatRoomRef = dbRef(db, `chatrooms/${roomId}`);
+    const snapshot = await get(chatRoomRef);
+
+    try {
+      if (!snapshot.exists()) {
+        await set(chatRoomRef, {
+          users: {
+            [currentUser.uid]: true,
+            [uid]: true,
+          },
+          createdAt: Date.now(),
+          lastMessage: '',
+          lastMessageTime: null,
+        });
+      }
+      navigate(`/ChatRoom/${roomId}`);
+    } catch (error) {
+      console.error("채팅방 생성 중 오류 발생:", error);
+    }
   };
 
   if (!isOpen) return null;
@@ -95,11 +126,13 @@ const SearchUser = ({ isOpen, closeModal }) => {
                   ))}
                 </div>
 
-                <button type="submit" className={style.requestButton}>
-                    <img src={paper_plane} />
+                <button 
+                  type="button" 
+                  className={style.requestButton} 
+                  onClick={() => handleRequestClick(user.uid)} 
+                >
+                  <img src={paper_plane} alt="채팅 시작" />
                 </button>
-
-
               </div>
             ))
           )}
@@ -109,4 +142,4 @@ const SearchUser = ({ isOpen, closeModal }) => {
   );
 };
 
-export default SearchUser;
+export default ReviewRequest;
