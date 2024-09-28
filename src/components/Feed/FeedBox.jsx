@@ -13,6 +13,7 @@ import FeedModal from "../modal/FeedModal";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/a11y-dark.css";
+import { useNavigate } from "react-router-dom";
 
 const FeedBox = () => {
   // 피드 작성 모달 state
@@ -146,6 +147,15 @@ const FeedBox = () => {
     }
     setSearchQuery(query);
   };
+
+  const navigate = useNavigate();
+
+  const handleClickUser = (uid) => {
+    setSearchQuery("");
+    // profile 페이지로 이동하면서 param값으로 해당 유저 uid 보내기
+    navigate("/profile", { state: { userId: uid } });
+    closeModal();
+  };
   return (
     <div style={{ marginBottom: "40px" }}>
       <div className={style.headContainer}>
@@ -176,7 +186,10 @@ const FeedBox = () => {
             console.log(author);
             return (
               <div key={feedId} className={style.feedContainer}>
-                <div className={style.feedUser}>
+                <div
+                  className={style.feedUser}
+                  onClick={() => handleClickUser(feed.authorUid)}
+                >
                   <img
                     src={author.profileImg || default_profile}
                     className={style.authorImg}
@@ -254,9 +267,13 @@ const FeedBox = () => {
                             src={comment?.profileImg || default_profile}
                             alt="리뷰작성자"
                             className={style.commentProfile}
+                            onClick={() => handleClickUser(comment.userId)}
                           />
                           <div>
-                            <p className={style.commentWriter}>
+                            <p
+                              className={style.commentWriter}
+                              onClick={() => handleClickUser(comment.userId)}
+                            >
                               {comment.nickname || "닉네임 없음"}
                             </p>
 

@@ -117,6 +117,7 @@
   background-color: #dde6e0;
   gap: 10px;
   align-items: center;
+  cursor: pointer;
 }
 .authorImg {
   width: 40px;
@@ -191,6 +192,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  cursor: pointer;
 }
 .commentForm {
   display: flex;
@@ -240,6 +242,7 @@
 .commentWriter {
   /* font-weight: bold; */
   margin-top: 4px;
+  cursor: pointer;
 }
 .commentDate {
   color: #a9a3a3;
