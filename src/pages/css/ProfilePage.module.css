@@ -12,7 +12,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
   width: 764px;
-  height: 760px;
+  /* height: 760px; */
   margin-left: auto;
   background-color: white;
   /* padding: 50px; */
@@ -20,20 +20,31 @@
   position: relative;
 }
 .back {
+  position: relative;
+}
+.back img {
   width: 100%;
   border-radius: 8px 8px 0 0;
+}
+.back p {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .profileImg {
   position: absolute;
   width: 150px;
-  left: 50px;
+  left: 48px;
   top: 30%;
 }
 
 .infoWrap {
   padding: 100px 80px 80px 80px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 .nickname {
   font-size: 24px;

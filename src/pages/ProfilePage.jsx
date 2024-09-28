@@ -48,7 +48,10 @@ const ProfilePage = () => {
         </div>
 
         <div className={style.infoBox}>
-          <img src={back} alt="background" className={style.back}></img>
+          <div className={style.back}>
+            <img src={back} alt="background"></img>
+            <p>프로필</p>
+          </div>
           <img
             src={userData?.profileImg || default_profile}
             alt="profile image"
