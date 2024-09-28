@@ -263,6 +263,7 @@
   color: #a9a3a3;
   /* margin-right: 20px; */
   cursor: pointer;
+  min-width: 30px;
 }
 
 code {
