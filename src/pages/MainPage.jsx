@@ -5,6 +5,8 @@ import ChatListBox from "../components/ChatListBox";
 import style from "./css/MainPage.module.css";
 import FeedBox from "../components/Feed/FeedBox";
 import HeadBox from "../components/HeadBox";
+import TopButton from "./TopButton";
+
 const MainPage = () => {
   return (
     <div className={style.wrap}>
@@ -18,6 +20,7 @@ const MainPage = () => {
           {/* <HeadBox /> */}
           <FeedBox />
         </div>
+        <TopButton />
       </div>
     </div>
   );
