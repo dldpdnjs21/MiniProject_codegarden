@@ -1,0 +1,39 @@
+.topButton {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .scrollBtn {
+    background-color: #ffffff;
+    color: #7e8e81;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 70px;
+    height: 45px;
+    border: 1px solid rgb(224, 223, 223);
+  }
+  
+  .scrollBtn:hover {
+    font-weight: bold;
+  }
+  
+  .scrollBtn:active {
+    background-color: #c5c5c5;
+  }
+  
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+    height: 0; /* 높이를 0으로 설정 */
+    margin: 0; /* 간격 제거 */
+    padding: 0; /* 패딩 제거 */
+  }
