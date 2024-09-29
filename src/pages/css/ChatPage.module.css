@@ -1,0 +1,11 @@
+.wrap {
+    padding-top: 40px;
+  }
+  .contentsContainer {
+    position: relative;
+    display: flex;
+    width: 1200px;
+    margin: 0 auto;
+    column-gap: 15px;
+  }
+  
