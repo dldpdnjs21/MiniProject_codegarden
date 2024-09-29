@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import ProfileBox from "../components/ProfileBox";
 import style from "./css/ProfilePage.module.css";
-import FeedBox from "../components/Feed/FeedBox";
-import HeadBox from "../components/HeadBox";
 import { useLocation } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, get, update } from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
+import { db } from "./firebase/firebase";
+import { useNavigate } from "react-router-dom";
 import back from "./img/profile_background.svg";
 import default_profile from "../components/img/default_profile.svg";
 import TechStackBadge from "../components/TechStackBadge";
@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const { state } = useLocation();
   const { userId } = state;
   console.log(userId);
+  const navigate = useNavigate();
 
   // 해당 유저 정보 가져오기
   const [userData, setUserData] = useState({});
@@ -39,6 +40,38 @@ const ProfilePage = () => {
       }
     });
   }, [userId]);
+
+  const handleClickDM = async () => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) return;
+
+    const roomId =
+      currentUser.uid > userId
+        ? `${currentUser.uid}_${userId}`
+        : `${userId}_${currentUser.uid}`;
+    const chatRoomRef = ref(db, `chatrooms/${roomId}`);
+    const snapshot = await get(chatRoomRef);
+
+    try {
+      if (!snapshot.exists()) {
+        await set(chatRoomRef, {
+          users: {
+            [currentUser.uid]: true,
+            [userId]: true,
+          },
+          createdAt: Date.now(),
+          lastMessage: "",
+          lastMessageTime: null,
+        });
+      }
+      navigate(`/chatroom/${roomId}`);
+    } catch (error) {
+      console.error("채팅방 생성 중 오류 발생:", error);
+    }
+  };
+
   return (
     <div className={style.wrap}>
       <div className={style.contentsContainer}>
@@ -82,7 +115,9 @@ const ProfilePage = () => {
               <p className={style.notice}>소개글이 없습니다</p>
             )}
 
-            <button className={style.dmBtn}>Direct Message</button>
+            <button className={style.dmBtn} onClick={handleClickDM}>
+              Direct Message
+            </button>
           </div>
         </div>
       </div>

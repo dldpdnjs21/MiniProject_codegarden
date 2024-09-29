@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ref as dbRef, get, set } from "firebase/database";
+import { ref as dbRef, get, set, push } from "firebase/database";
 import { db } from "../../pages/firebase/firebase";
 import { getAuth } from "firebase/auth"; // 추가
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import style from "../css/ReviewRequest.module.css";
 import searchicon from "../img/searchicon.svg";
 import TechStackBadge from "../TechStackBadge";
@@ -12,7 +12,7 @@ import paper_plane from "../img/paper_plane.svg";
 const ReviewRequest = ({ isOpen, closeModal }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,24 +20,27 @@ const ReviewRequest = ({ isOpen, closeModal }) => {
         setFilteredUsers([]);
         return;
       }
-    
+
       const usersRef = dbRef(db, "users");
       const snapshot = await get(usersRef);
       if (snapshot.exists()) {
         const data = snapshot.val();
-        
+
         const usersArray = Object.entries(data).map(([uid, user]) => ({
           uid,
-          ...user
+          ...user,
         }));
-    
+
         const filtered = usersArray.filter((user) => {
           const nickname = user.nickname ? user.nickname.toLowerCase() : "";
           const devField = user.developmentField
             ? user.developmentField.toLowerCase()
             : "";
-    
-          return nickname.includes(searchQuery.toLowerCase()) || devField.includes(searchQuery.toLowerCase());
+
+          return (
+            nickname.includes(searchQuery.toLowerCase()) ||
+            devField.includes(searchQuery.toLowerCase())
+          );
         });
         setFilteredUsers(filtered);
       } else {
@@ -57,7 +60,10 @@ const ReviewRequest = ({ isOpen, closeModal }) => {
 
     if (!currentUser) return;
 
-    const roomId = currentUser.uid > uid ? `${currentUser.uid}_${uid}` : `${uid}_${currentUser.uid}`;
+    const roomId =
+      currentUser.uid > uid
+        ? `${currentUser.uid}_${uid}`
+        : `${uid}_${currentUser.uid}`;
     const chatRoomRef = dbRef(db, `chatrooms/${roomId}`);
     const snapshot = await get(chatRoomRef);
 
@@ -69,11 +75,24 @@ const ReviewRequest = ({ isOpen, closeModal }) => {
             [uid]: true,
           },
           createdAt: Date.now(),
-          lastMessage: '',
+          lastMessage: "",
           lastMessageTime: null,
         });
       }
-      navigate(`/ChatRoom/${roomId}`);
+
+      // 리뷰어에게 리뷰 요청 알림 보내기
+      const userRef = dbRef(db, `users/${currentUser.uid}`);
+      const userSnapshot = await get(userRef);
+      const userData = userSnapshot.val();
+      if (!userData) return;
+
+      const notificationRef = dbRef(db, `notifications/${uid}/reviewReq`);
+      const newNotificationRef = push(notificationRef);
+      await set(newNotificationRef, {
+        contents: `'${userData.nickname}' 님의 리뷰 요청이 도착했습니다`,
+        chatRoomId: roomId,
+      });
+      navigate(`/chatroom/${roomId}`);
     } catch (error) {
       console.error("채팅방 생성 중 오류 발생:", error);
     }
@@ -126,10 +145,10 @@ const ReviewRequest = ({ isOpen, closeModal }) => {
                   ))}
                 </div>
 
-                <button 
-                  type="button" 
-                  className={style.requestButton} 
-                  onClick={() => handleRequestClick(user.uid)} 
+                <button
+                  type="button"
+                  className={style.requestButton}
+                  onClick={() => handleRequestClick(user.uid)}
                 >
                   <img src={paper_plane} alt="채팅 시작" />
                 </button>

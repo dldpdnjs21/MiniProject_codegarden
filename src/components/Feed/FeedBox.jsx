@@ -64,22 +64,6 @@ const FeedBox = () => {
     };
 
     fetchFeeds();
-
-    // 현재유저 가져오기
-    // const fetchUser = async () => {
-    //   const user = auth.currentUser;
-
-    //   if (!user) return;
-
-    //   const userRef = dbRef(db, `users/${user.uid}`);
-    //   const userSnapshot = await get(userRef);
-    //   const userData = userSnapshot.val();
-    //   setCurrentUser(userData);
-    //   console.log(userData);
-    //   if (!userData) return;
-    // };
-
-    // fetchUser();
   }, []);
 
   // 피드 필터링 함수 (검색어를 기준으로)
