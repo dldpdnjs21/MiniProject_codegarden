@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import { db } from "../pages/firebase/firebase";
-
 import style from "./css/ChatListBox.module.css";
 import profileImg from "./img/default_profile.svg";
 
