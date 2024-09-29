@@ -191,7 +191,7 @@ const ChatRoom = () => {
           <FaImage className={style.icon} />
         </button>
         <button onClick={handleSendMessage} className={style.sendButton}>
-          <img src={paper_plane} alt="채팅 시작" />
+          <img src={paper_plane} alt="전송" />
         </button>
       </div>
     </div>
