@@ -66,7 +66,7 @@ const ProfilePage = () => {
           lastMessageTime: null,
         });
       }
-      navigate(`/ChatRoom/${roomId}`);
+      navigate(`/chatroom/${roomId}`);
     } catch (error) {
       console.error("채팅방 생성 중 오류 발생:", error);
     }
