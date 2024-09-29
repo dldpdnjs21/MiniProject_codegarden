@@ -48,17 +48,20 @@ const TopButton = () => {
   return (
     <div className={style.topButton}>
       {/* 스크롤 했을 때만 보이는 Top 버튼 */}
-      {isVisibleTop && (
-        <button onClick={scrollToTop} className={style.scrollBtn}>
-          Top
-        </button>
-      )}
+      <button
+        onClick={scrollToTop}
+        className={`${style.scrollBtn} ${isVisibleTop ? '' : style.hidden}`}
+      >
+        Top
+      </button>
+
       {/* 맨 아래에 있을 때 사라지는 Down 버튼 */}
-      {isVisibleDown && (
-        <button onClick={scrollToBottom} className={style.scrollBtn}>
-          Down
-        </button>
-      )}
+      <button
+        onClick={scrollToBottom}
+        className={`${style.scrollBtn} ${isVisibleDown ? '' : style.hidden}`}
+      >
+        Down
+      </button>
     </div>
   );
 };
