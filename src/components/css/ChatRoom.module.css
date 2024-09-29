@@ -1,124 +1,167 @@
 .chatRoom {
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
-    width: 764px;
-    margin-left: auto;
-    background-color: #dde6e0;
-    height: 712px;
-  }
-  
-  .chatUser {
-    background-color: white;
-    border-radius: 10px 10px 0 0;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .chatProfile {
-    width: 60px;
-  }
-  
-  .chatNickname {
-    font-size: 20px;
-    text-align: center;
-    margin-left: 20px;
-    margin-top: 5px;
-    font-weight: bold;
-  }
-  
-  .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-    border: none;
-    margin: 2% 5%;
-    height: 70%;
-  }
-  
-  .message {
-    margin-bottom: 25px;
-  }
-  
-  .sender {
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    margin-bottom: 3px;
-  }
-  
-  .messageText {
-    padding: 15px;
-    border-radius: 0 20px 20px 20px;
-    max-width: 80%;
-    width: fit-content;
-    font-size: 14px;
-    word-wrap: break-word;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
+  width: 764px;
+  margin-left: auto;
+  background-color: #dde6e0;
+  height: 712px;
+  margin-bottom: 40px;
+  position: relative;
 }
-  
-  /* 보내는 사람의 메시지 스타일 = 나 */
-  .myMessageContainer .messageText {
-    background-color: #7e8e81;
-    color: #fff;
-    border-radius: 0 20px 20px 20px;
-  }
-  
-  /* 받는 사람의 메시지 스타일 = 상대 */
-  .otherMessageContainer .messageText {
-    background-color: #fff;
-    color: black;
-    border-radius: 0 20px 20px 20px;
-  }
-  
-  .inputArea {
-    display: flex;
-    margin: 0 5%;
-    padding: 10px;
-  }
-  
-  .messageInput {
-    flex: 1;
-    padding: 0 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    border: none;
-  }
-  .fileButton {
-    padding: 10px 0px;
-    border: none;
-    cursor: pointer;
-    background-color: white;
-  }
-  .icon {
-    font-size: 20px;
-    cursor: pointer;
-    color: #7e8e81;
-    background-color: white;
-  }
 
-  .sendButton {
-    border: none;
-    padding:10px 20px;
-    color: #7e8e81;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    background-color: #ffffff;
-  }
+.chatUser {
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 
-  .messageImage {
-    max-width: 100%;
-    height: auto;
-    padding: 15px;
-    margin-top: 5px;
-  }
-  
-  .uploadedFileName {
-    margin-left: 50px;
-    font-size: 12px;
-    color: #888;
-  }
-  .uploadedFileName span{
-    margin-left: 20px;
-  }
+.chatProfile {
+  width: 60px;
+}
+
+.chatNickname {
+  font-size: 20px;
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  border: none;
+  margin: 2% 5% 0 5%;
+  height: 72%;
+}
+
+.message {
+  margin-bottom: 25px;
+}
+
+.sender {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.messageText {
+  padding: 15px;
+  border-radius: 0 20px 20px 20px;
+  max-width: 98%;
+  width: fit-content;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+/* 보내는 사람의 메시지 스타일 = 나 */
+.myMessageContainer .messageText {
+  background-color: #7e8e81;
+  color: #fff;
+  border-radius: 0 20px 20px 20px;
+}
+
+/* 받는 사람의 메시지 스타일 = 상대 */
+.otherMessageContainer .messageText {
+  background-color: #fff;
+  color: black;
+  border-radius: 0 20px 20px 20px;
+}
+
+.inputArea {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  align-items: center; /* 텍스트 상자와 버튼이 중앙 정렬되도록 설정 */
+  padding: 10px 20px; /* 내부 여백 */
+  margin: 0 5%;
+  background-color: white;
+  border-radius: 5px; /* 둥근 모서리 */
+  width: 90%;
+  gap: 15px;
+}
+
+.messageInput {
+  flex: 1; /* 남은 공간을 모두 차지하도록 설정 */
+  border: none;
+  resize: none; /* 크기 조정 비활성화 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+  max-height: 100px; /* 최대 높이를 설정해 일정 높이 이상은 스크롤 */
+  /* padding: 10px; 내부 여백 */
+  /* font-size: 16px; 폰트 크기 */
+  outline: none; /* 포커스 시 기본 아웃라인 제거 */
+}
+
+.buttonArea {
+  margin-left: auto;
+}
+.fileButton {
+  border: none;
+  cursor: pointer;
+  background: none;
+  /* background-color: white; */
+}
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #7e8e81;
+  /* background-color: white; */
+}
+
+.sendButton {
+  border: none;
+  padding-left: 15px;
+  color: #7e8e81;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  background: none;
+  /* background-color: #ffffff; */
+}
+
+.messageImage {
+  max-width: 100%;
+  height: auto;
+  padding: 15px;
+  margin-top: 5px;
+}
+
+.uploadedFileName {
+  margin-left: 50px;
+  font-size: 12px;
+  color: #888;
+}
+.uploadedFileName span {
+  margin-left: 20px;
+}
+
+.markdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.markdown code {
+  /* margin-bottom: 10px; */
+  padding: 3px 6px;
+  border: none;
+  border-radius: 3px;
+  /* background-color: #212121; */
+  background-color: #1f242b;
+  font-size: 14px;
+  font-family: "Hack";
+  /* font-family: "Pretendard", "Malgun Gothic", sans-serif; */
+}
+
+.markdown p {
+  white-space: pre-wrap;
+}
+
+.removeFileButton {
+  cursor: pointer;
+}

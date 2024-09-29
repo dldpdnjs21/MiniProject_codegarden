@@ -2,13 +2,12 @@
   /* border: 2px solid black; */
   border-radius: 8px;
   width: 400px;
-  height: 410px;
-  max-height: 410px;
+  height: 447px;
+  /* max-height: 410px; */
   background-color: white;
   box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
   padding: 20px 20px 0 20px;
   margin-top: 15px;
-  overflow: scroll;
 }
 
 .chatlistHeader {
@@ -22,9 +21,9 @@
 }
 
 .chatRoomList {
-  /* display: flex;
-  flex-direction: column;
-  row-gap: 15px; */
+  max-height: 364px;
+  overflow: scroll;
+  margin: 10px 0;
 }
 
 .roomInfo {

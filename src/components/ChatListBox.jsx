@@ -59,7 +59,10 @@ const ChatListBox = () => {
                   const lastMessageObj = chatRoom.messages
                     ? Object.values(chatRoom.messages).pop()
                     : null;
-                  const lastMessage = lastMessageObj ? lastMessageObj.text : "";
+                  let lastMessage = lastMessageObj ? lastMessageObj.text : "";
+                  if (lastMessage?.length > 30) {
+                    lastMessage = lastMessage.substring(0, 30) + "...";
+                  }
                   const lastMessageTimestamp = lastMessageObj
                     ? lastMessageObj.timestamp
                     : 0; // 메시지가 없으면 0으로 설정
@@ -96,28 +99,6 @@ const ChatListBox = () => {
           }, {});
 
           setChatRooms(formattedChatRooms);
-          //       // 마지막 메시지 가져오기
-          //       const lastMessage = chatRoom.messages
-          //         ? Object.values(chatRoom.messages).pop().text
-          //         : "";
-
-          //       // 필요한 정보만 저장
-          //       setChatRooms((prevChatRooms) => ({
-          //         ...prevChatRooms,
-          //         [chatRoomId]: {
-          //           otherUserUid: otherUid,
-          //           otherUserNickname: nickname,
-          //           otherUserProfileImg: profileImg,
-          //           lastMessage: lastMessage,
-          //         },
-          //       }));
-          //     } else {
-          //       console.log(`상대 유저 프로필을 찾을 수 없음: ${otherUid}`);
-          //     }
-          //   } else {
-          //     console.log("현재 사용자가 속해 있지 않은 채팅방");
-          //   }
-          // });
         } else {
           console.log("No chat rooms found");
         }

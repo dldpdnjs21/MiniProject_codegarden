@@ -2,12 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import { ref as dbRef, onValue, set } from "firebase/database";
 import { db } from "../pages/firebase/firebase";
 import { getAuth } from "firebase/auth";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import style from "./css/ChatRoom.module.css";
 import default_profile from "./img/default_profile.svg";
 import paper_plane from "./img/paper_plane.svg";
 import { FaImage } from "react-icons/fa";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
+import TextareaAutosize from "react-textarea-autosize";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/a11y-dark.css";
 
 const ChatRoom = () => {
   const { roomId } = useParams();
@@ -19,8 +28,9 @@ const ChatRoom = () => {
   const [imageFile, setImageFile] = useState(null);
   const [uploadedFileName, setUploadedFileName] = useState(""); // 업로드한 파일 이름 상태 추가
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
-  // 현재 로그인한 유저의 uid 가져오기
+  // 현재 로그인한 유저의 uid 및 상대 유저 uid 가져오기
   useEffect(() => {
     const auth = getAuth();
     const currentUid = auth.currentUser?.uid;
@@ -32,12 +42,29 @@ const ChatRoom = () => {
       if (roomData) {
         console.log("Participants:", roomData.users);
         const userIds = Object.keys(roomData.users);
-        const otherUid = userIds.find((uid) => uid !== currentUid) || "";
+        const otherUid =
+          userIds.find((uid) => uid !== currentUid) || currentUid;
         setOtherUserUid(otherUid);
         console.log("otherUserUid:", otherUid);
+
+        // 채팅방 참여자들 정보 가져오기
+        userIds.forEach((userId) => {
+          if (!userInfos[userId]) {
+            const userRef = dbRef(db, `users/${userId}`);
+            onValue(userRef, (userSnapshot) => {
+              const userData = userSnapshot.val();
+              if (userData) {
+                setUserInfos((prevUserInfos) => ({
+                  ...prevUserInfos,
+                  [userId]: userData,
+                }));
+              }
+            });
+          }
+        });
       }
     });
-  }, [roomId]);
+  }, [roomId, userInfos]);
 
   // 채팅 메시지 및 유저정보 불러오기
   useEffect(() => {
@@ -50,25 +77,9 @@ const ChatRoom = () => {
           ...message,
         }));
         setMessages(messagesArray);
-
-        messagesArray.forEach((message) => {
-          const { senderId } = message;
-          if (!userInfos[senderId]) {
-            const userRef = dbRef(db, `users/${senderId}`);
-            onValue(userRef, (userSnapshot) => {
-              const userData = userSnapshot.val();
-              if (userData) {
-                setUserInfos((prevUserInfos) => ({
-                  ...prevUserInfos,
-                  [senderId]: userData,
-                }));
-              }
-            });
-          }
-        });
       }
     });
-  }, [roomId, userInfos]);
+  }, [roomId]);
 
   // 메시지 전송 함수
   const handleSendMessage = async () => {
@@ -76,12 +87,15 @@ const ChatRoom = () => {
 
     const messageId = Date.now().toString();
     const messagesRef = dbRef(db, `chatrooms/${roomId}/messages/${messageId}`);
-    
+
     let imageUrl = "";
 
     if (imageFile) {
       const storage = getStorage();
-      const imageRef = storageRef(storage, `chatrooms/${roomId}/images/${imageFile.name}`);
+      const imageRef = storageRef(
+        storage,
+        `chatrooms/${roomId}/images/${imageFile.name}`
+      );
       await uploadBytes(imageRef, imageFile);
       imageUrl = await getDownloadURL(imageRef);
     }
@@ -111,9 +125,9 @@ const ChatRoom = () => {
       setUploadedFileName(file.name);
     }
   };
-   // 업로드한 파일 삭제
-   const handleRemoveFile = () => {
-    setImageFile(null); 
+  // 업로드한 파일 삭제
+  const handleRemoveFile = () => {
+    setImageFile(null);
     setUploadedFileName("");
   };
 
@@ -123,11 +137,29 @@ const ChatRoom = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  
 
+  const pressEnter = (e) => {
+    if (e.nativeEvent.isComposing) {
+      // isComposing 이 true 이면
+      return; // 조합 중이므로 동작을 막는다.
+    }
+
+    if (e.key === "Enter" && e.shiftKey) {
+      // [shift] + [Enter] 치면 걍 리턴
+      return;
+    } else if (e.key === "Enter") {
+      // [Enter] 치면 메시지 보내기
+      handleSendMessage(e);
+    }
+  };
+
+  const handleClickUser = () => {
+    // profile 페이지로 이동하면서 param값으로 해당 유저 uid 보내기
+    navigate("/profile", { state: { userId: otherUserUid } });
+  };
   return (
     <div className={style.chatRoom}>
-      <div className={style.chatUser}>
+      <div className={style.chatUser} onClick={handleClickUser}>
         <img
           src={default_profile}
           className={style.chatProfile}
@@ -152,7 +184,11 @@ const ChatRoom = () => {
                 {userInfos[message.senderId]?.nickname || "보내는 사람"}
               </div>
               <div className={style.messageText}>
-                {message.text}
+                <div className={style.markdown}>
+                  <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                    {message.text}
+                  </ReactMarkdown>
+                </div>
                 {message.image && (
                   <img
                     src={message.image}
@@ -164,22 +200,26 @@ const ChatRoom = () => {
             </div>
           </div>
         ))}
-         <div ref={messagesEndRef} /> {/* 메시지 끝*/}
+        <div ref={messagesEndRef} /> {/* 메시지 끝*/}
       </div>
       {uploadedFileName && ( // 업로드한 파일 이름 표시
         <div className={style.uploadedFileName}>
           업로드한 파일: {uploadedFileName}
-          <span onClick={handleRemoveFile} className={style.removeFileButton}>X</span>
+          <span onClick={handleRemoveFile} className={style.removeFileButton}>
+            X
+          </span>
         </div>
       )}
       <div className={style.inputArea}>
-        <input
-          type="text"
+        <TextareaAutosize
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="메시지를 입력하세요..."
+          onKeyDown={pressEnter}
+          placeholder="메시지를 입력하세요... (코드는 마크다운 문법으로 작성)"
           className={style.messageInput}
+          maxRows={3}
         />
+        {/* </div> */}
         <input
           type="file"
           accept="image/*"
@@ -187,12 +227,14 @@ const ChatRoom = () => {
           ref={fileInputRef}
           style={{ display: "none" }}
         />
-        <button onClick={handleImageUpload} className={style.fileButton}>
-          <FaImage className={style.icon} />
-        </button>
-        <button onClick={handleSendMessage} className={style.sendButton}>
-          <img src={paper_plane} alt="전송" />
-        </button>
+        <div className={style.buttonArea}>
+          <button onClick={handleImageUpload} className={style.fileButton}>
+            <FaImage className={style.icon} />
+          </button>
+          <button onClick={handleSendMessage} className={style.sendButton}>
+            <img src={paper_plane} alt="전송" />
+          </button>
+        </div>
       </div>
     </div>
   );

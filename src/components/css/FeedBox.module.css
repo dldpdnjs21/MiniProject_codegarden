@@ -266,12 +266,13 @@
   min-width: 30px;
 }
 
-code {
+.markdown code {
   margin-bottom: 10px;
   padding: 3px 6px;
   border: none;
   border-radius: 3px;
-  background-color: #e9ecef;
+  /* background-color: #212121; */
+  background-color: #1f242b;
   font-size: 15px;
   font-family: "Hack";
   /* font-family: "Pretendard", "Malgun Gothic", sans-serif; */

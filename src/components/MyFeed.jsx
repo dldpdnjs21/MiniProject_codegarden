@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import style from "./css/MyFeed.module.css"; 
+import style from "./css/MyFeed.module.css";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, onValue, remove } from "firebase/database";
 import ReviewRequest from "./modal/ReviewRequest";
 import LanguageBadge from "./LanguageBadge";
-import { db } from "../pages/firebase/firebase"
+import { db } from "../pages/firebase/firebase";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/a11y-dark.css";
 
 const MyFeed = () => {
   const [feeds, setFeeds] = useState([]);
@@ -26,13 +29,13 @@ const MyFeed = () => {
         snapshot.forEach((childSnapshot) => {
           const data = childSnapshot.val();
           if (data.authorUid === user.uid) {
-            feedData.push({ 
-              id: childSnapshot.key, 
-              title: data.title, 
+            feedData.push({
+              id: childSnapshot.key,
+              title: data.title,
               createdAt: data.createdAt,
               content: data.content,
               language: data.language,
-              comments: data.comments ? Object.values(data.comments) : []
+              comments: data.comments ? Object.values(data.comments) : [],
             });
           }
         });
@@ -47,7 +50,7 @@ const MyFeed = () => {
     const db = getDatabase();
     const feedRef = ref(db, `feeds/${feedId}`);
     await remove(feedRef);
-    setFeeds(feeds.filter(feed => feed.id !== feedId));
+    setFeeds(feeds.filter((feed) => feed.id !== feedId));
   };
 
   const feedLoad = (feedId) => {
@@ -55,18 +58,18 @@ const MyFeed = () => {
   };
 
   const openReviewRequest = (feedId) => {
-    setSelectedFeedId(feedId); 
+    setSelectedFeedId(feedId);
     setIsReviewRequestOpen(true);
   };
 
   const closeReviewRequest = () => {
-    setIsReviewRequestOpen(false); 
+    setIsReviewRequestOpen(false);
   };
 
   // 댓글 작성자 정보를 가져오는 함수
   const fetchCommentAuthors = (comments) => {
     const authors = {};
-    comments.forEach(comment => {
+    comments.forEach((comment) => {
       if (comment.userId && !authors[comment.userId]) {
         const userRef = ref(db, `users/${comment.userId}`);
         onValue(userRef, (snapshot) => {
@@ -87,13 +90,11 @@ const MyFeed = () => {
 
             return (
               <li key={feed.id} className={style.feedItem}>
-                <div className={style.feedList}>
-                  <div 
-                    className={style.feedTitle} 
-                    onClick={() => feedLoad(feed.id)}
-                  >
-                    {feed.title}
-                  </div>
+                <div
+                  className={style.feedList}
+                  onClick={() => feedLoad(feed.id)}
+                >
+                  <div className={style.feedTitle}>{feed.title}</div>
                   <div className={style.feedInfo}>
                     <div className={style.feedDate}>
                       {new Date(feed.createdAt).toLocaleString()}
@@ -104,11 +105,17 @@ const MyFeed = () => {
 
                 {LoadFeedId === feed.id && (
                   <div className={style.feedDetails}>
-                    <div className={style.feedContent}>{feed.content}</div>
+                    <div className={style.feedContent}>
+                      <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                        {feed.content}
+                      </ReactMarkdown>
+                    </div>
                     <div className={style.feedComments}>
                       <div className={style.feedComment}>
                         <div className={style.reviewCount}>
-                          <strong className={style.reviewCountTitle}>리뷰</strong>
+                          <strong className={style.reviewCountTitle}>
+                            리뷰
+                          </strong>
                           {feed.comments.length}
                         </div>
                         <div className={style.reviewComments}>
@@ -117,9 +124,10 @@ const MyFeed = () => {
                               {feed.comments.map((comment, index) => (
                                 <li key={index} className={style.commentItem}>
                                   <div className={style.commentUser}>
-                                    {commentAuthors[comment.userId]?.nickname || "익명"}
-                                    </div>
-                                    {comment.text}
+                                    {commentAuthors[comment.userId]?.nickname ||
+                                      "익명"}
+                                  </div>
+                                  {comment.text}
                                 </li>
                               ))}
                             </ul>
@@ -130,13 +138,13 @@ const MyFeed = () => {
                       </div>
                     </div>
                     <div className={style.feedActions}>
-                      <button 
-                        onClick={() => handleDelete(feed.id)} 
+                      <button
+                        onClick={() => handleDelete(feed.id)}
                         className={style.deleteButton}
                       >
                         삭제
                       </button>
-                      <button 
+                      <button
                         onClick={() => openReviewRequest(feed.id)}
                         className={style.reviewButton}
                       >
@@ -153,7 +161,10 @@ const MyFeed = () => {
         )}
       </ul>
       {isReviewRequestOpen && (
-        <ReviewRequest isOpen={isReviewRequestOpen} closeModal={closeReviewRequest} />
+        <ReviewRequest
+          isOpen={isReviewRequestOpen}
+          closeModal={closeReviewRequest}
+        />
       )}
     </div>
   );
