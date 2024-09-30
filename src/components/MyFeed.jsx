@@ -8,6 +8,7 @@ import { db } from "../pages/firebase/firebase";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/a11y-dark.css";
+import emptyImg from "./img/emptyImg.svg";
 
 const MyFeed = () => {
   const [feeds, setFeeds] = useState([]);
@@ -157,7 +158,10 @@ const MyFeed = () => {
             );
           })
         ) : (
-          <li className={style.noFeed}>작성한 피드가 없습니다.</li>
+          <div className={style.noFeed}>
+            <img src={emptyImg} className={style.emptyImg} />
+            <li className={style.noFeedText}>작성한 피드가 없습니다.</li>
+          </div>
         )}
       </ul>
       {isReviewRequestOpen && (

@@ -26,7 +26,7 @@ const ChatRoom = () => {
   const [currentUserUid, setCurrentUserUid] = useState("");
   const [otherUserUid, setOtherUserUid] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [uploadedFileName, setUploadedFileName] = useState(""); // 업로드한 파일 이름 상태 추가
+  const [uploadedFileName, setUploadedFileName] = useState("");
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -47,7 +47,6 @@ const ChatRoom = () => {
         setOtherUserUid(otherUid);
         console.log("otherUserUid:", otherUid);
 
-        // 채팅방 참여자들 정보 가져오기
         userIds.forEach((userId) => {
           if (!userInfos[userId]) {
             const userRef = dbRef(db, `users/${userId}`);
@@ -104,7 +103,7 @@ const ChatRoom = () => {
       senderId: currentUserUid,
       text: newMessage,
       image: imageUrl,
-      timestamp: Date.now(),
+      timestamp: Date.now(), // 메시지 전송 시 타임스탬프 추가
     });
 
     setNewMessage("");
@@ -125,6 +124,7 @@ const ChatRoom = () => {
       setUploadedFileName(file.name);
     }
   };
+
   // 업로드한 파일 삭제
   const handleRemoveFile = () => {
     setImageFile(null);
@@ -140,23 +140,33 @@ const ChatRoom = () => {
 
   const pressEnter = (e) => {
     if (e.nativeEvent.isComposing) {
-      // isComposing 이 true 이면
-      return; // 조합 중이므로 동작을 막는다.
+      return;
     }
 
     if (e.key === "Enter" && e.shiftKey) {
-      // [shift] + [Enter] 치면 걍 리턴
       return;
     } else if (e.key === "Enter") {
-      // [Enter] 치면 메시지 보내기
       handleSendMessage(e);
     }
   };
 
   const handleClickUser = () => {
-    // profile 페이지로 이동하면서 param값으로 해당 유저 uid 보내기
     navigate("/profile", { state: { userId: otherUserUid } });
   };
+
+// 타임스탬프를 날짜 및 시간으로 변환하는 함수
+const formatTimestamp = (timestamp) => {
+  const date = new Date(timestamp);
+  const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
+  const day = date.getDate();
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const period = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12; // 0시를 12시로 변환
+
+  return `${month}.${day} ${hours}:${minutes} ${period}`;
+};
+
   return (
     <div className={style.chatRoom}>
       <div className={style.chatUser} onClick={handleClickUser}>
@@ -183,26 +193,31 @@ const ChatRoom = () => {
               <div className={style.sender}>
                 {userInfos[message.senderId]?.nickname || "보내는 사람"}
               </div>
-              <div className={style.messageText}>
-                <div className={style.markdown}>
-                  <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
-                    {message.text}
-                  </ReactMarkdown>
+              <div className={style.messageInfo}>
+                <div className={style.messageText}>
+                  <div className={style.markdown}>
+                    <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                      {message.text}
+                    </ReactMarkdown>
+                  </div>
+                  {message.image && (
+                    <img
+                      src={message.image}
+                      alt="첨부된 이미지"
+                      className={style.messageImage}
+                    />
+                  )}
                 </div>
-                {message.image && (
-                  <img
-                    src={message.image}
-                    alt="첨부된 이미지"
-                    className={style.messageImage}
-                  />
-                )}
+                <div className={style.sendDate}>
+                  {formatTimestamp(message.timestamp)} {/* 타임스탬프 표시 */}
+                </div>
               </div>
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} /> {/* 메시지 끝*/}
+        <div ref={messagesEndRef} /> {/* 메시지 끝 */}
       </div>
-      {uploadedFileName && ( // 업로드한 파일 이름 표시
+      {uploadedFileName && (
         <div className={style.uploadedFileName}>
           업로드한 파일: {uploadedFileName}
           <span onClick={handleRemoveFile} className={style.removeFileButton}>
@@ -219,7 +234,6 @@ const ChatRoom = () => {
           className={style.messageInput}
           maxRows={3}
         />
-        {/* </div> */}
         <input
           type="file"
           accept="image/*"

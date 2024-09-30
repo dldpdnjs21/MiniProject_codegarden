@@ -131,7 +131,7 @@ const ChatListBox = () => {
         <p className={style.chatTitle}>채팅방</p>
       </div>
       <div className={style.chatRoomList}>
-        {chatRooms &&
+        {chatRooms && Object.keys(chatRooms).length > 0 ? (
           Object.entries(chatRooms).map(([roomId, roomInfo]) => (
             <div
               key={roomId}
@@ -145,15 +145,16 @@ const ChatListBox = () => {
                 alt="Profile"
               />
               <div>
-                <div className={style.nickname}>
-                  {roomInfo.otherUserNickname}
-                </div>
+                <div className={style.nickname}>{roomInfo.otherUserNickname}</div>
                 <div className={style.chatText}>
                   {roomInfo.lastMessage || "대화가 없습니다"}
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className={style.noChatRoom}>채팅방이 없습니다.</p>
+        )}
       </div>
     </div>
   );

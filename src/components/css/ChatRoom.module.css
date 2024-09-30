@@ -41,6 +41,8 @@
 
 .message {
   margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
 }
 
 .sender {
@@ -52,6 +54,11 @@
   margin-bottom: 3px;
 }
 
+.messageInfo{
+  display: flex;
+  flex-direction: row;
+}
+
 .messageText {
   padding: 15px;
   border-radius: 0 20px 20px 20px;
@@ -59,6 +66,13 @@
   width: fit-content;
   font-size: 14px;
   word-wrap: break-word;
+}
+
+.sendDate {
+  padding-left: 3px;
+  margin-top: auto;
+  color: #a6aea7;
+  font-size: 13px;
 }
 
 /* 보내는 사람의 메시지 스타일 = 나 */

@@ -2,7 +2,7 @@
   /* border: 2px solid black; */
   border-radius: 8px;
   width: 400px;
-  height: 447px;
+  height: 405px;
   /* max-height: 410px; */
   background-color: white;
   box-shadow: 0 2px 4px rgba(34, 34, 34, 0.08);
@@ -21,9 +21,8 @@
 }
 
 .chatRoomList {
-  max-height: 364px;
+  max-height: 322px;
   overflow: scroll;
-  margin: 10px 0;
 }
 
 .roomInfo {
@@ -31,9 +30,13 @@
   flex-direction: row;
   column-gap: 20px;
   align-items: center;
-  padding: 15px 0;
+  padding: 15px 10px;
   cursor: pointer;
   /* border-bottom: 1px solid #d8d7d6; */
+}
+
+.roomInfo:hover{
+  background-color: #7e8e81;
 }
 
 .roomInfo:not(:last-child) {
@@ -43,6 +46,8 @@
 
 .profileImg {
   width: 55px;
+  border-radius: 50%;
+  border: 1px solid rgb(139, 175, 156);
 }
 
 .nickname {
@@ -54,4 +59,19 @@
 .chatText {
   font-size: 15px;
   color: #5b5b5b;
+}
+
+.roomInfo:hover .nickname {color: white;}
+.roomInfo:hover .chatText {color: white;}
+.roomInfo:hover .profileImg {
+  border-radius: 50%;
+  border: 1px solid rgb(244, 244, 244);
+}
+
+.noChatRoom {
+  margin-top: 100px;
+  text-align: center;
+  color: #a8a8a8;
+  font-size: 15px;
+  /* font-weight: bold; */
 }
