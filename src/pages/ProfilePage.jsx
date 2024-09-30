@@ -12,6 +12,7 @@ import back from "./img/profile_background.svg";
 import default_profile from "../components/img/default_profile.svg";
 import TechStackBadge from "../components/TechStackBadge";
 import ChatListBox from "../components/ChatListBox";
+import Footer from "../components/Footer";
 
 const ProfilePage = () => {
   // navigate param 값 가져오기
@@ -78,6 +79,7 @@ const ProfilePage = () => {
         <div>
           <ProfileBox />
           <ChatListBox />
+          <Footer />
         </div>
 
         <div className={style.infoBox}>

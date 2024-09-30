@@ -4,6 +4,7 @@ import ProfileBox from "../components/ProfileBox";
 import ChatListBox from "../components/ChatListBox";
 import style from "./css/MyPage.module.css";
 import MyBox from "../components/MyBox";
+import Footer from "../components/Footer";
 
 const MyPage = () => {
   return (
@@ -13,6 +14,7 @@ const MyPage = () => {
         <div className={style.leftsection}>
           <ProfileBox />
           <ChatListBox />
+          <Footer />
         </div>
         <div className={style.myBox}>
           <MyBox />

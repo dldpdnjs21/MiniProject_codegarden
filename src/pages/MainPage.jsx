@@ -6,6 +6,7 @@ import style from "./css/MainPage.module.css";
 import FeedBox from "../components/Feed/FeedBox";
 import HeadBox from "../components/HeadBox";
 import TopButton from "./TopButton";
+import Footer from "../components/Footer";
 
 const MainPage = () => {
   return (
@@ -15,6 +16,7 @@ const MainPage = () => {
         <div className={style.leftsection}>
           <ProfileBox />
           <ChatListBox />
+          <Footer />
         </div>
         <div className={style.feedList}>
           {/* <HeadBox /> */}

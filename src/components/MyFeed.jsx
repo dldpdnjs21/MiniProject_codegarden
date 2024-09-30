@@ -36,6 +36,7 @@ const MyFeed = () => {
               createdAt: data.createdAt,
               content: data.content,
               language: data.language,
+              feedImg: data.imageUrl ? data.imageUrl : "",
               comments: data.comments ? Object.values(data.comments) : [],
             });
           }
@@ -110,6 +111,9 @@ const MyFeed = () => {
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                         {feed.content}
                       </ReactMarkdown>
+                      {feed.feedImg && (
+                        <img src={feed.feedImg} alt="피드 이미지" />
+                      )}
                     </div>
                     <div className={style.feedComments}>
                       <div className={style.feedComment}>
