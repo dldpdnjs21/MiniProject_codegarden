@@ -5,8 +5,6 @@
 
 ## 1. 프로젝트 개요
 
----
-
 소프트웨어 개발 문화에서 코드 리뷰는 코드 품질 향상, 개발자 역량 강화에 중요한 역할을 한다.
 
 보다 원활하고 체계적인 리뷰 환경을 제공함으로써 개발자들이 서로의 코드를 쉽게 공유하고 리뷰할 수 있도록 돕기 위해 코드 리뷰 커뮤니티를 기획하였다.
@@ -38,17 +36,14 @@
 
 ## 2. 기술 스택 + SW아키텍처
 
----
-
 ### 2.1 프론트엔드
 
-- React
-  
-- HTML/CSS/JavaScript
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 
 ### 2.2 데이터베이스
 
-- Firebase
+<img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
 
 ### 2.3 시스템 설계 방식
 
@@ -57,8 +52,6 @@
 
 
 ## 3. 요구사항
-
----
 
 ### 3.1 사용자 인증
 
@@ -108,8 +101,6 @@
 
 ## 4. 화면 설계
 
----
-
 ### 4.1  UI 디자인 - Figma
 
 ![스크린샷 2024-10-01 오전 10.37.07.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/1b2d0fc0-4258-433a-978c-2c190dc546bd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-10-01_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10.37.07.png)
@@ -119,8 +110,6 @@
 ![코드가든 최종 발표 (7).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/45180e67-3356-4359-98cb-d70b0ea7de8e/86b7a228-bd29-40cc-8aa5-5139e06eb8e2.png)
 
 ## 5. 데이터베이스 구조
-
----
 
 - Firebase의 데이터베이스는 JSON 객체로 저장되는 NoSQL 데이터베이스
 - ERD와 비슷한 형식으로 다이어그램을 그려서 데이터 구조를 시각화하였음
@@ -205,8 +194,6 @@
 
 ## 6. 주요 구현 사항
 
----
-
 ### 6.1 회원가입 / 로그인
 
 - Firebase Authentication
@@ -246,8 +233,6 @@
 
 ## 7. 성과 및 향후 계획
 
----
-
 ### 7.1 주요 성과
 
 - **로그인 및 회원가입 기능 구현**
@@ -277,8 +262,6 @@
     - React를 이용하여 프론트엔드에서 Firebase와 연결하여 데이터베이스, 인증, 알림, 실시간 채팅 등의 백엔드 기능을 구현하여 원활한 사용자 경험을 제공
 
 ## 8. 실행화면
-
----
 
 로그인
 
@@ -323,5 +306,11 @@
 
 ## 팀 정보
 
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/hyeonjeongk"><img src="https://avatars.githubusercontent.com/u/65122491?v=4" width="100px;" alt=""/><br /><sub><b>김현정</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/dldpdnjs21"><img src="https://avatars.githubusercontent.com/u/49943501?v=4" width="100px;" alt=""/><br /><sub><b>이예원</b></sub></a><br /></td>      
+    </tr>
+  </tbody>
+</table>
