@@ -38,16 +38,18 @@
 
 ### 2.1 프론트엔드
 
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 
 ### 2.2 데이터베이스
 
-<img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
+<img src="https://img.shields.io/badge/Firebase-DD2C00?style=for-the-badge&logo=firebase&logoColor=black">
 
 ### 2.3 시스템 설계 방식
 
-![코드가든 최종 발표 (1).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/caed6fc0-4a8b-4c3a-8cda-28fb456c4321/%E1%84%8F%E1%85%A9%E1%84%83%E1%85%B3%E1%84%80%E1%85%A1%E1%84%83%E1%85%B3%E1%86%AB_%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC_%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD_(1).png)
+![%E1%84%8F%E1%85%A9%E1%84%83%E1%85%B3%E1%84%80%E1%85%A1%E1%84%83%E1%85%B3%E1%86%AB_%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC_%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD_(1)](https://github.com/user-attachments/assets/791c06ce-c674-48cf-9568-e0aee16a035c)
 
 
 
@@ -103,11 +105,11 @@
 
 ### 4.1  UI 디자인 - Figma
 
-![스크린샷 2024-10-01 오전 10.37.07.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/1b2d0fc0-4258-433a-978c-2c190dc546bd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-10-01_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10.37.07.png)
+<img width="591" alt="%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-10-01_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10 37 07" src="https://github.com/user-attachments/assets/84bce232-9856-4af7-882d-24b393810038">
 
 ### 4.2  화면 흐름도
 
-![코드가든 최종 발표 (7).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/45180e67-3356-4359-98cb-d70b0ea7de8e/86b7a228-bd29-40cc-8aa5-5139e06eb8e2.png)
+![86b7a228-bd29-40cc-8aa5-5139e06eb8e2](https://github.com/user-attachments/assets/45077fcb-425c-4287-81ed-d8ddcbd3ca6c)
 
 ## 5. 데이터베이스 구조
 
@@ -116,7 +118,7 @@
 
 ### 5.1  ER다이어그램
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/6f95e2c9-c7c3-4f4a-afe9-c4c6ceafcd12/image.png)
+![image](https://github.com/user-attachments/assets/2ba37d6f-9f2e-4e3c-82d8-f3783bfbba12)
 
 ### 5.2 JSON 구조
 
@@ -263,54 +265,55 @@
 
 ## 8. 실행화면
 
-로그인
+#### 로그인
 
-![로그인.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/1099ae2e-77a1-4266-bd4e-3b13d7c01382/%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%8B%E1%85%B5%E1%86%AB.png)
+![%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%8B%E1%85%B5%E1%86%AB](https://github.com/user-attachments/assets/2c1afd4e-21a2-4667-99ee-39b16068e49c)
 
-회원가입
+#### 회원가입
 
-![회원가입.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/6b41c85a-9fea-4b71-bbf1-7130c977c61c/%E1%84%92%E1%85%AC%E1%84%8B%E1%85%AF%E1%86%AB%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%B8.png)
+![%E1%84%92%E1%85%AC%E1%84%8B%E1%85%AF%E1%86%AB%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%B8](https://github.com/user-attachments/assets/2eee0597-c143-493d-a8a8-74b9d0eff9e1)
 
-메인
+#### 메인
 
-![메인화면.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/d565bb99-3e09-4b74-bae9-abd84d211c8b/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB.png)
+![%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB](https://github.com/user-attachments/assets/13d3f6a7-0c73-4862-8d1d-fbb046553646)
 
-댓글
+#### 댓글
 
-![댓글.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/d39c5b9f-b93d-4e43-9c1a-294aec304716/%E1%84%83%E1%85%A2%E1%86%BA%E1%84%80%E1%85%B3%E1%86%AF.png)
+![%E1%84%83%E1%85%A2%E1%86%BA%E1%84%80%E1%85%B3%E1%86%AF](https://github.com/user-attachments/assets/071a5d26-f854-4765-b0cc-12d67fd45203)
 
-채팅방 & 목록
+#### 채팅방 & 목록
 
-![채팅방 & 목록.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/a2b20d33-bf19-4720-b63e-81b17a27fcfe/%E1%84%8E%E1%85%A2%E1%84%90%E1%85%B5%E1%86%BC%E1%84%87%E1%85%A1%E1%86%BC__%E1%84%86%E1%85%A9%E1%86%A8%E1%84%85%E1%85%A9%E1%86%A8.png)
+![%E1%84%8E%E1%85%A2%E1%84%90%E1%85%B5%E1%86%BC%E1%84%87%E1%85%A1%E1%86%BC__%E1%84%86%E1%85%A9%E1%86%A8%E1%84%85%E1%85%A9%E1%86%A8](https://github.com/user-attachments/assets/a462f9a8-a10e-4a4b-b450-b595ae54873c)
 
-내 피드
+#### 내 피드
 
-![내 피드 조회.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/0bd181a9-41ec-4134-8f4e-fe1ec6e9b830/%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A9%E1%84%92%E1%85%AC.png)
+![%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A9%E1%84%92%E1%85%AC](https://github.com/user-attachments/assets/659cf140-82f4-496e-97fa-b9c46ed86684)
 
-유저 프로필
+#### 유저 프로필
 
-![유저 프로필.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/2dd844a2-bb62-440f-aa92-f19331892194/%E1%84%8B%E1%85%B2%E1%84%8C%E1%85%A5_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png)
+![%E1%84%8B%E1%85%B2%E1%84%8C%E1%85%A5_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF](https://github.com/user-attachments/assets/419bd4aa-842c-4550-9f52-38d5f1133ed3)
 
-프로필 수정
+#### 프로필 수정
 
-![내 프로필 수정.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/f4751de9-3e37-43bd-9c29-595bb2658e2f/%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF_%E1%84%89%E1%85%AE%E1%84%8C%E1%85%A5%E1%86%BC.png)
+![%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF_%E1%84%89%E1%85%AE%E1%84%8C%E1%85%A5%E1%86%BC](https://github.com/user-attachments/assets/501334fb-ad03-4e3b-8d3f-0521bb1755eb)
 
-피드 작성
+#### 피드 작성
 
-![피드작성.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/d49cb076-b738-4a55-a70f-64e19a0f588f/%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A1%E1%86%A8%E1%84%89%E1%85%A5%E1%86%BC.png)
+![%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A1%E1%86%A8%E1%84%89%E1%85%A5%E1%86%BC](https://github.com/user-attachments/assets/114e94bf-0d66-45b9-938b-bbc0ef6b096a)
 
-검색
+#### 검색
 
-![검색.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/102a1eef-74c2-4a58-a261-a0fd262c0087/f18409d6-59e1-4dad-8ade-548d87faf87d/%E1%84%80%E1%85%A5%E1%86%B7%E1%84%89%E1%85%A2%E1%86%A8.png)
+![%E1%84%80%E1%85%A5%E1%86%B7%E1%84%89%E1%85%A2%E1%86%A8](https://github.com/user-attachments/assets/3746a794-9893-4e54-942d-77143eb4db0c)
 
+---
 
 ## 팀 정보
 
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://github.com/hyeonjeongk"><img src="https://avatars.githubusercontent.com/u/65122491?v=4" width="100px;" alt=""/><br /><sub><b>김현정</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/dldpdnjs21"><img src="https://avatars.githubusercontent.com/u/49943501?v=4" width="100px;" alt=""/><br /><sub><b>이예원</b></sub></a><br /></td>      
+      <td align="center"><a href="https://github.com/hyeonjeongk"><img src="https://avatars.githubusercontent.com/u/49943501?v=4" width="100px;" alt=""/><br /><sub><b>김현정</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/dldpdnjs21"><img src="https://avatars.githubusercontent.com/u/65122491?v=4" width="100px;" alt=""/><br /><sub><b>이예원</b></sub></a><br /></td>      
     </tr>
   </tbody>
 </table>
