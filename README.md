@@ -259,46 +259,75 @@
 
 ## 8. 실행화면
 
-#### 로그인
-
+<details>
+	<summary>로그인</summary>
+	
 ![%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%8B%E1%85%B5%E1%86%AB](https://github.com/user-attachments/assets/2c1afd4e-21a2-4667-99ee-39b16068e49c)
 
-#### 회원가입
+</details>
 
+<details>
+	<summary>회원가입</summary>
+	
 ![%E1%84%92%E1%85%AC%E1%84%8B%E1%85%AF%E1%86%AB%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%B8](https://github.com/user-attachments/assets/2eee0597-c143-493d-a8a8-74b9d0eff9e1)
+ 
+</details>
 
-#### 메인
-
+<details>
+	<summary>메인</summary>
+	
 ![%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB](https://github.com/user-attachments/assets/13d3f6a7-0c73-4862-8d1d-fbb046553646)
+	
+</details>
 
-#### 댓글
+<details>
+	<summary>댓글</summary>
 
-![%E1%84%83%E1%85%A2%E1%86%BA%E1%84%80%E1%85%B3%E1%86%AF](https://github.com/user-attachments/assets/071a5d26-f854-4765-b0cc-12d67fd45203)
+ ![%E1%84%83%E1%85%A2%E1%86%BA%E1%84%80%E1%85%B3%E1%86%AF](https://github.com/user-attachments/assets/071a5d26-f854-4765-b0cc-12d67fd45203)
+ 
+</details>
 
-#### 채팅방 & 목록
-
+<details>
+	<summary>채팅방 & 목록</summary>
+	
 ![%E1%84%8E%E1%85%A2%E1%84%90%E1%85%B5%E1%86%BC%E1%84%87%E1%85%A1%E1%86%BC__%E1%84%86%E1%85%A9%E1%86%A8%E1%84%85%E1%85%A9%E1%86%A8](https://github.com/user-attachments/assets/a462f9a8-a10e-4a4b-b450-b595ae54873c)
+	
+</details>
 
-#### 내 피드
+<details>
+	<summary>내 피드</summary>
 
 ![%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A9%E1%84%92%E1%85%AC](https://github.com/user-attachments/assets/659cf140-82f4-496e-97fa-b9c46ed86684)
 
-#### 유저 프로필
+</details>
 
+<details>
+	<summary>유저 프로필</summary>
+	
 ![%E1%84%8B%E1%85%B2%E1%84%8C%E1%85%A5_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF](https://github.com/user-attachments/assets/419bd4aa-842c-4550-9f52-38d5f1133ed3)
 
-#### 프로필 수정
+</details>
 
-![%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF_%E1%84%89%E1%85%AE%E1%84%8C%E1%85%A5%E1%86%BC](https://github.com/user-attachments/assets/501334fb-ad03-4e3b-8d3f-0521bb1755eb)
+<details>
+	<summary>프로필 수정</summary>
 
-#### 피드 작성
+ ![%E1%84%82%E1%85%A2_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF_%E1%84%89%E1%85%AE%E1%84%8C%E1%85%A5%E1%86%BC](https://github.com/user-attachments/assets/501334fb-ad03-4e3b-8d3f-0521bb1755eb)
+ 
+</details>
 
+<details>
+	<summary>피드 작성</summary>
+	
 ![%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A1%E1%86%A8%E1%84%89%E1%85%A5%E1%86%BC](https://github.com/user-attachments/assets/114e94bf-0d66-45b9-938b-bbc0ef6b096a)
 
-#### 검색
+</details>
 
-![%E1%84%80%E1%85%A5%E1%86%B7%E1%84%89%E1%85%A2%E1%86%A8](https://github.com/user-attachments/assets/3746a794-9893-4e54-942d-77143eb4db0c)
+<details>
+	<summary>검색</summary>
 
+ ![%E1%84%80%E1%85%A5%E1%86%B7%E1%84%89%E1%85%A2%E1%86%A8](https://github.com/user-attachments/assets/3746a794-9893-4e54-942d-77143eb4db0c)
+
+</details>
 
 
 ## 팀 정보
